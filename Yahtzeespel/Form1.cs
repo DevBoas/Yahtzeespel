@@ -126,7 +126,24 @@ namespace Yahtzeespel
                 }
             }
         }
-
+        private void CheckForChance()
+        {
+            int total = 0;
+            foreach (Control c in Controls)
+            {
+                if (c.GetType() == typeof(Label))
+                {
+                    Label lab = (Label)c;
+                    if (lab.Tag != null && lab.Tag.ToString() != String.Empty)
+                    {
+                        String tag = lab.Tag.ToString();
+                        int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length - 1));
+                        total += number * System.Convert.ToInt32(tag);
+                    }
+                }
+            }
+            Chance.Text = Chance.Text.Substring(0, Chance.Text.Length - 1) + total.ToString();
+        }
         private void UpdateScoreBoard()
         {
 
@@ -161,6 +178,7 @@ namespace Yahtzeespel
             CheckForCarrre();
             CheckForStraight();
             CheckForYahtzee();
+            CheckForChance();
         }
         
         private void RollDice(object sender, EventArgs e)

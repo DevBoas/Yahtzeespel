@@ -44,11 +44,12 @@ namespace Yahtzeespel
             this.Score4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.SmallStraight = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.LargeStraight = new System.Windows.Forms.Label();
             this.Yahtzee = new System.Windows.Forms.Label();
             this.ThreeOfAKind = new System.Windows.Forms.Label();
             this.Carre = new System.Windows.Forms.Label();
+            this.Chance = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Dice2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice4)).BeginInit();
@@ -144,7 +145,7 @@ namespace Yahtzeespel
             // Score
             // 
             this.Score.AutoSize = true;
-            this.Score.Location = new System.Drawing.Point(373, 29);
+            this.Score.Location = new System.Drawing.Point(330, 29);
             this.Score.Name = "Score";
             this.Score.Size = new System.Drawing.Size(44, 13);
             this.Score.TabIndex = 9;
@@ -154,7 +155,7 @@ namespace Yahtzeespel
             // Score2
             // 
             this.Score2.AutoSize = true;
-            this.Score2.Location = new System.Drawing.Point(372, 42);
+            this.Score2.Location = new System.Drawing.Point(329, 42);
             this.Score2.Name = "Score2";
             this.Score2.Size = new System.Drawing.Size(45, 13);
             this.Score2.TabIndex = 10;
@@ -164,7 +165,7 @@ namespace Yahtzeespel
             // Score3
             // 
             this.Score3.AutoSize = true;
-            this.Score3.Location = new System.Drawing.Point(365, 55);
+            this.Score3.Location = new System.Drawing.Point(322, 55);
             this.Score3.Name = "Score3";
             this.Score3.Size = new System.Drawing.Size(52, 13);
             this.Score3.TabIndex = 11;
@@ -174,7 +175,7 @@ namespace Yahtzeespel
             // Score6
             // 
             this.Score6.AutoSize = true;
-            this.Score6.Location = new System.Drawing.Point(373, 94);
+            this.Score6.Location = new System.Drawing.Point(330, 94);
             this.Score6.Name = "Score6";
             this.Score6.Size = new System.Drawing.Size(44, 13);
             this.Score6.TabIndex = 14;
@@ -184,7 +185,7 @@ namespace Yahtzeespel
             // Score5
             // 
             this.Score5.AutoSize = true;
-            this.Score5.Location = new System.Drawing.Point(373, 81);
+            this.Score5.Location = new System.Drawing.Point(330, 81);
             this.Score5.Name = "Score5";
             this.Score5.Size = new System.Drawing.Size(44, 13);
             this.Score5.TabIndex = 13;
@@ -194,7 +195,7 @@ namespace Yahtzeespel
             // Score4
             // 
             this.Score4.AutoSize = true;
-            this.Score4.Location = new System.Drawing.Point(372, 68);
+            this.Score4.Location = new System.Drawing.Point(329, 68);
             this.Score4.Name = "Score4";
             this.Score4.Size = new System.Drawing.Size(45, 13);
             this.Score4.TabIndex = 12;
@@ -205,7 +206,7 @@ namespace Yahtzeespel
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(365, 16);
+            this.label7.Location = new System.Drawing.Point(314, 9);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(73, 13);
             this.label7.TabIndex = 15;
@@ -214,27 +215,17 @@ namespace Yahtzeespel
             // SmallStraight
             // 
             this.SmallStraight.AutoSize = true;
-            this.SmallStraight.Location = new System.Drawing.Point(357, 161);
+            this.SmallStraight.Location = new System.Drawing.Point(412, 55);
             this.SmallStraight.Name = "SmallStraight";
             this.SmallStraight.Size = new System.Drawing.Size(81, 13);
             this.SmallStraight.TabIndex = 16;
             this.SmallStraight.Tag = "";
             this.SmallStraight.Text = "Small straight: 0";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(373, 115);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 13);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Combo";
-            // 
             // LargeStraight
             // 
             this.LargeStraight.AutoSize = true;
-            this.LargeStraight.Location = new System.Drawing.Point(355, 174);
+            this.LargeStraight.Location = new System.Drawing.Point(410, 68);
             this.LargeStraight.Name = "LargeStraight";
             this.LargeStraight.Size = new System.Drawing.Size(83, 13);
             this.LargeStraight.TabIndex = 18;
@@ -245,7 +236,7 @@ namespace Yahtzeespel
             // Yahtzee
             // 
             this.Yahtzee.AutoSize = true;
-            this.Yahtzee.Location = new System.Drawing.Point(380, 187);
+            this.Yahtzee.Location = new System.Drawing.Point(435, 81);
             this.Yahtzee.Name = "Yahtzee";
             this.Yahtzee.Size = new System.Drawing.Size(58, 13);
             this.Yahtzee.TabIndex = 19;
@@ -256,7 +247,7 @@ namespace Yahtzeespel
             // ThreeOfAKind
             // 
             this.ThreeOfAKind.AutoSize = true;
-            this.ThreeOfAKind.Location = new System.Drawing.Point(347, 135);
+            this.ThreeOfAKind.Location = new System.Drawing.Point(402, 29);
             this.ThreeOfAKind.Name = "ThreeOfAKind";
             this.ThreeOfAKind.Size = new System.Drawing.Size(91, 13);
             this.ThreeOfAKind.TabIndex = 20;
@@ -266,18 +257,39 @@ namespace Yahtzeespel
             // Carre
             // 
             this.Carre.AutoSize = true;
-            this.Carre.Location = new System.Drawing.Point(394, 148);
+            this.Carre.Location = new System.Drawing.Point(449, 42);
             this.Carre.Name = "Carre";
             this.Carre.Size = new System.Drawing.Size(44, 13);
             this.Carre.TabIndex = 21;
             this.Carre.Tag = "";
             this.Carre.Text = "Carré: 0";
             // 
+            // Chance
+            // 
+            this.Chance.AutoSize = true;
+            this.Chance.Location = new System.Drawing.Point(437, 94);
+            this.Chance.Name = "Chance";
+            this.Chance.Size = new System.Drawing.Size(56, 13);
+            this.Chance.TabIndex = 22;
+            this.Chance.Tag = "";
+            this.Chance.Text = "Chance: 0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(428, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Combo";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 292);
+            this.ClientSize = new System.Drawing.Size(533, 157);
+            this.Controls.Add(this.Chance);
             this.Controls.Add(this.Carre);
             this.Controls.Add(this.ThreeOfAKind);
             this.Controls.Add(this.Yahtzee);
@@ -330,11 +342,12 @@ namespace Yahtzeespel
         private System.Windows.Forms.Label Score4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label SmallStraight;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label LargeStraight;
         private System.Windows.Forms.Label Yahtzee;
         private System.Windows.Forms.Label ThreeOfAKind;
         private System.Windows.Forms.Label Carre;
+        private System.Windows.Forms.Label Chance;
+        private System.Windows.Forms.Label label2;
     }
 }
 
