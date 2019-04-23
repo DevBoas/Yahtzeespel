@@ -36,13 +36,16 @@ namespace Yahtzeespel
             this.Btn_RollDice = new System.Windows.Forms.Button();
             this.UserRollsDisplay = new System.Windows.Forms.Label();
             this.Stoppen = new System.Windows.Forms.Button();
-            this.Ones = new System.Windows.Forms.Label();
-            this.Twos = new System.Windows.Forms.Label();
-            this.Threes = new System.Windows.Forms.Label();
-            this.Sixes = new System.Windows.Forms.Label();
-            this.Fives = new System.Windows.Forms.Label();
-            this.Fours = new System.Windows.Forms.Label();
+            this.Score = new System.Windows.Forms.Label();
+            this.Score2 = new System.Windows.Forms.Label();
+            this.Score3 = new System.Windows.Forms.Label();
+            this.Score6 = new System.Windows.Forms.Label();
+            this.Score5 = new System.Windows.Forms.Label();
+            this.Score4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.SmallStraight = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.LargeStraight = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Dice2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice4)).BeginInit();
@@ -135,65 +138,65 @@ namespace Yahtzeespel
             this.Stoppen.UseVisualStyleBackColor = true;
             this.Stoppen.Click += new System.EventHandler(this.Stoppen_Click);
             // 
-            // Ones
+            // Score
             // 
-            this.Ones.AutoSize = true;
-            this.Ones.Location = new System.Drawing.Point(373, 29);
-            this.Ones.Name = "Ones";
-            this.Ones.Size = new System.Drawing.Size(44, 13);
-            this.Ones.TabIndex = 9;
-            this.Ones.Tag = "1";
-            this.Ones.Text = "Ones: 0";
+            this.Score.AutoSize = true;
+            this.Score.Location = new System.Drawing.Point(373, 29);
+            this.Score.Name = "Score";
+            this.Score.Size = new System.Drawing.Size(44, 13);
+            this.Score.TabIndex = 9;
+            this.Score.Tag = "1";
+            this.Score.Text = "Ones: 0";
             // 
-            // Twos
+            // Score2
             // 
-            this.Twos.AutoSize = true;
-            this.Twos.Location = new System.Drawing.Point(372, 42);
-            this.Twos.Name = "Twos";
-            this.Twos.Size = new System.Drawing.Size(45, 13);
-            this.Twos.TabIndex = 10;
-            this.Twos.Tag = "2";
-            this.Twos.Text = "Twos: 0";
+            this.Score2.AutoSize = true;
+            this.Score2.Location = new System.Drawing.Point(372, 42);
+            this.Score2.Name = "Score2";
+            this.Score2.Size = new System.Drawing.Size(45, 13);
+            this.Score2.TabIndex = 10;
+            this.Score2.Tag = "2";
+            this.Score2.Text = "Twos: 0";
             // 
-            // Threes
+            // Score3
             // 
-            this.Threes.AutoSize = true;
-            this.Threes.Location = new System.Drawing.Point(365, 55);
-            this.Threes.Name = "Threes";
-            this.Threes.Size = new System.Drawing.Size(52, 13);
-            this.Threes.TabIndex = 11;
-            this.Threes.Tag = "3";
-            this.Threes.Text = "Threes: 0";
+            this.Score3.AutoSize = true;
+            this.Score3.Location = new System.Drawing.Point(365, 55);
+            this.Score3.Name = "Score3";
+            this.Score3.Size = new System.Drawing.Size(52, 13);
+            this.Score3.TabIndex = 11;
+            this.Score3.Tag = "3";
+            this.Score3.Text = "Threes: 0";
             // 
-            // Sixes
+            // Score6
             // 
-            this.Sixes.AutoSize = true;
-            this.Sixes.Location = new System.Drawing.Point(373, 94);
-            this.Sixes.Name = "Sixes";
-            this.Sixes.Size = new System.Drawing.Size(44, 13);
-            this.Sixes.TabIndex = 14;
-            this.Sixes.Tag = "6";
-            this.Sixes.Text = "Sixes: 0";
+            this.Score6.AutoSize = true;
+            this.Score6.Location = new System.Drawing.Point(373, 94);
+            this.Score6.Name = "Score6";
+            this.Score6.Size = new System.Drawing.Size(44, 13);
+            this.Score6.TabIndex = 14;
+            this.Score6.Tag = "6";
+            this.Score6.Text = "Sixes: 0";
             // 
-            // Fives
+            // Score5
             // 
-            this.Fives.AutoSize = true;
-            this.Fives.Location = new System.Drawing.Point(373, 81);
-            this.Fives.Name = "Fives";
-            this.Fives.Size = new System.Drawing.Size(44, 13);
-            this.Fives.TabIndex = 13;
-            this.Fives.Tag = "5";
-            this.Fives.Text = "Fives: 0";
+            this.Score5.AutoSize = true;
+            this.Score5.Location = new System.Drawing.Point(373, 81);
+            this.Score5.Name = "Score5";
+            this.Score5.Size = new System.Drawing.Size(44, 13);
+            this.Score5.TabIndex = 13;
+            this.Score5.Tag = "5";
+            this.Score5.Text = "Fives: 0";
             // 
-            // Fours
+            // Score4
             // 
-            this.Fours.AutoSize = true;
-            this.Fours.Location = new System.Drawing.Point(372, 68);
-            this.Fours.Name = "Fours";
-            this.Fours.Size = new System.Drawing.Size(45, 13);
-            this.Fours.TabIndex = 12;
-            this.Fours.Tag = "4";
-            this.Fours.Text = "Fours: 0";
+            this.Score4.AutoSize = true;
+            this.Score4.Location = new System.Drawing.Point(372, 68);
+            this.Score4.Name = "Score4";
+            this.Score4.Size = new System.Drawing.Size(45, 13);
+            this.Score4.TabIndex = 12;
+            this.Score4.Tag = "4";
+            this.Score4.Text = "Fours: 0";
             // 
             // label7
             // 
@@ -205,18 +208,51 @@ namespace Yahtzeespel
             this.label7.TabIndex = 15;
             this.label7.Text = "ScoreBoard";
             // 
+            // SmallStraight
+            // 
+            this.SmallStraight.AutoSize = true;
+            this.SmallStraight.Location = new System.Drawing.Point(357, 136);
+            this.SmallStraight.Name = "SmallStraight";
+            this.SmallStraight.Size = new System.Drawing.Size(81, 13);
+            this.SmallStraight.TabIndex = 16;
+            this.SmallStraight.Tag = "";
+            this.SmallStraight.Text = "Small straight: 0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(373, 115);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Combo";
+            // 
+            // LargeStraight
+            // 
+            this.LargeStraight.AutoSize = true;
+            this.LargeStraight.Location = new System.Drawing.Point(355, 149);
+            this.LargeStraight.Name = "LargeStraight";
+            this.LargeStraight.Size = new System.Drawing.Size(83, 13);
+            this.LargeStraight.TabIndex = 18;
+            this.LargeStraight.Tag = "";
+            this.LargeStraight.Text = "Large straight: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 292);
+            this.Controls.Add(this.LargeStraight);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.SmallStraight);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.Sixes);
-            this.Controls.Add(this.Fives);
-            this.Controls.Add(this.Fours);
-            this.Controls.Add(this.Threes);
-            this.Controls.Add(this.Twos);
-            this.Controls.Add(this.Ones);
+            this.Controls.Add(this.Score6);
+            this.Controls.Add(this.Score5);
+            this.Controls.Add(this.Score4);
+            this.Controls.Add(this.Score3);
+            this.Controls.Add(this.Score2);
+            this.Controls.Add(this.Score);
             this.Controls.Add(this.Stoppen);
             this.Controls.Add(this.UserRollsDisplay);
             this.Controls.Add(this.Btn_RollDice);
@@ -248,13 +284,16 @@ namespace Yahtzeespel
         private System.Windows.Forms.Button Btn_RollDice;
         private System.Windows.Forms.Label UserRollsDisplay;
         private System.Windows.Forms.Button Stoppen;
-        private System.Windows.Forms.Label Ones;
-        private System.Windows.Forms.Label Twos;
-        private System.Windows.Forms.Label Threes;
-        private System.Windows.Forms.Label Sixes;
-        private System.Windows.Forms.Label Fives;
-        private System.Windows.Forms.Label Fours;
+        private System.Windows.Forms.Label Score;
+        private System.Windows.Forms.Label Score2;
+        private System.Windows.Forms.Label Score3;
+        private System.Windows.Forms.Label Score6;
+        private System.Windows.Forms.Label Score5;
+        private System.Windows.Forms.Label Score4;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label SmallStraight;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label LargeStraight;
     }
 }
 

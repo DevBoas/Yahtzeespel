@@ -18,6 +18,7 @@ namespace Yahtzeespel
             InitializeComponent();
         }
         int rolls = 3;
+        Boolean newGame = false;
         private void DiceClick(object sender, EventArgs e)
         {
             PictureBox pic = (PictureBox)sender;
@@ -29,19 +30,51 @@ namespace Yahtzeespel
 
         private void EndOfGame()
         {
-            MessageBox.Show("Truly is the end");
-            UpdateScoreBoard();
+            if (!newGame)
+            {
+                newGame = true;
+                MessageBox.Show("Truly is the end");
+                UpdateScoreBoard();
+            }
+        }
+
+        private int CheckForStraight()
+        {
+            int count = 0;
+            foreach (Control c in Controls)
+            {
+                if (c.GetType() == typeof(Label))
+                {
+                    Label lab = (Label)c;
+                    if (lab.Tag != null && lab.Tag.ToString() != String.Empty)
+                    {
+                        String tag = lab.Tag.ToString();
+                        int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length - 1));
+                        if (number > 0)
+                            count++;
+                        else
+                            count = 0;
+                        if (count == 4)
+                            SmallStraight.Text = SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1) + "30";
+                        else if(count == 5)
+                            LargeStraight.Text = LargeStraight.Text.Substring(0, LargeStraight.Text.Length - 1) + "40";
+                        //MessageBox.Show("Tag = " + tag);
+                    }
+                }
+            }
+            return 0;
         }
 
         private void UpdateScoreBoard()
         {
+
             foreach (Control c in Controls)
             {
                 if (c.GetType() == typeof(PictureBox))
                 {
                     PictureBox pic = (PictureBox)c;
                     String tag = pic.Image.Tag.ToString();
-                    MessageBox.Show("Tag1 = " + tag);
+                    //MessageBox.Show("Tag1 = " + tag);
                     foreach (Control c2 in Controls)
                     {
                         if (c2.GetType() == typeof(Label))
@@ -62,6 +95,7 @@ namespace Yahtzeespel
                     }
                 }
             }
+            CheckForStraight();
         }
         
         private void RollDice(object sender, EventArgs e)
