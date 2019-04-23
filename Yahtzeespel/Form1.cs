@@ -38,7 +38,7 @@ namespace Yahtzeespel
             }
         }
 
-        private int CheckForStraight()
+        private void CheckForStraight()
         {
             int count = 0;
             foreach (Control c in Controls)
@@ -62,7 +62,69 @@ namespace Yahtzeespel
                     }
                 }
             }
-            return 0;
+        }
+        private void CheckForCarrre()
+        {
+            Boolean found = false;
+            int total = 0;
+            foreach (Control c in Controls)
+            {
+                if (c.GetType() == typeof(Label))
+                {
+                    Label lab = (Label)c;
+                    if (lab.Tag != null && lab.Tag.ToString() != String.Empty)
+                    {
+                        String tag = lab.Tag.ToString();
+                        int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length - 1));
+                        total += number * System.Convert.ToInt32(tag);
+                        if (number == 4)
+                            found = true;
+                    }
+                }
+            }
+            if (found)
+                Carre.Text = Carre.Text.Substring(0, Carre.Text.Length - 1) + total.ToString();
+        }
+
+        private void CheckForThreeOfAKind()
+        {
+            Boolean found = false;
+            int total = 0;
+            foreach (Control c in Controls)
+            {
+                if (c.GetType() == typeof(Label))
+                {
+                    Label lab = (Label)c;
+                    if (lab.Tag != null && lab.Tag.ToString() != String.Empty)
+                    {
+                        String tag = lab.Tag.ToString();
+                        int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length - 1));
+                        total += number * System.Convert.ToInt32(tag);
+                        if (number == 3)
+                            found = true;
+                    }
+                }
+            }
+            if (found)
+                ThreeOfAKind.Text = ThreeOfAKind.Text.Substring(0, ThreeOfAKind.Text.Length - 1) + total.ToString();
+        }
+
+        private void CheckForYahtzee()
+        {
+            foreach (Control c2 in Controls)
+            {
+                if (c2.GetType() == typeof(Label))
+                {
+                    Label lab = (Label)c2;
+                    if (lab.Tag != null && lab.Tag.ToString() != String.Empty)
+                    {
+                        String tag = lab.Tag.ToString();
+                        int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length - 1));
+                        if (number == 5)
+                            Yahtzee.Text = Yahtzee.Text.Substring(0, Yahtzee.Text.Length - 1) + "50";
+                    }
+                }
+            }
         }
 
         private void UpdateScoreBoard()
@@ -95,7 +157,10 @@ namespace Yahtzeespel
                     }
                 }
             }
+            CheckForThreeOfAKind();
+            CheckForCarrre();
             CheckForStraight();
+            CheckForYahtzee();
         }
         
         private void RollDice(object sender, EventArgs e)
@@ -137,6 +202,16 @@ namespace Yahtzeespel
                 UserRollsDisplay.Text = "Rolls left: " + rolls.ToString();
                 EndOfGame();
             }
+        }
+
+        private void Yahtzee_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LargeStraight_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

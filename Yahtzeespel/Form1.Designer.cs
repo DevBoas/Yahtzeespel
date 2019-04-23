@@ -46,6 +46,9 @@ namespace Yahtzeespel
             this.SmallStraight = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.LargeStraight = new System.Windows.Forms.Label();
+            this.Yahtzee = new System.Windows.Forms.Label();
+            this.ThreeOfAKind = new System.Windows.Forms.Label();
+            this.Carre = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Dice2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice4)).BeginInit();
@@ -211,7 +214,7 @@ namespace Yahtzeespel
             // SmallStraight
             // 
             this.SmallStraight.AutoSize = true;
-            this.SmallStraight.Location = new System.Drawing.Point(357, 136);
+            this.SmallStraight.Location = new System.Drawing.Point(357, 161);
             this.SmallStraight.Name = "SmallStraight";
             this.SmallStraight.Size = new System.Drawing.Size(81, 13);
             this.SmallStraight.TabIndex = 16;
@@ -231,18 +234,53 @@ namespace Yahtzeespel
             // LargeStraight
             // 
             this.LargeStraight.AutoSize = true;
-            this.LargeStraight.Location = new System.Drawing.Point(355, 149);
+            this.LargeStraight.Location = new System.Drawing.Point(355, 174);
             this.LargeStraight.Name = "LargeStraight";
             this.LargeStraight.Size = new System.Drawing.Size(83, 13);
             this.LargeStraight.TabIndex = 18;
             this.LargeStraight.Tag = "";
             this.LargeStraight.Text = "Large straight: 0";
+            this.LargeStraight.Click += new System.EventHandler(this.LargeStraight_Click);
+            // 
+            // Yahtzee
+            // 
+            this.Yahtzee.AutoSize = true;
+            this.Yahtzee.Location = new System.Drawing.Point(380, 187);
+            this.Yahtzee.Name = "Yahtzee";
+            this.Yahtzee.Size = new System.Drawing.Size(58, 13);
+            this.Yahtzee.TabIndex = 19;
+            this.Yahtzee.Tag = "";
+            this.Yahtzee.Text = "Yahtzee: 0";
+            this.Yahtzee.Click += new System.EventHandler(this.Yahtzee_Click);
+            // 
+            // ThreeOfAKind
+            // 
+            this.ThreeOfAKind.AutoSize = true;
+            this.ThreeOfAKind.Location = new System.Drawing.Point(347, 135);
+            this.ThreeOfAKind.Name = "ThreeOfAKind";
+            this.ThreeOfAKind.Size = new System.Drawing.Size(91, 13);
+            this.ThreeOfAKind.TabIndex = 20;
+            this.ThreeOfAKind.Tag = "";
+            this.ThreeOfAKind.Text = "Three of a kind: 0";
+            // 
+            // Carre
+            // 
+            this.Carre.AutoSize = true;
+            this.Carre.Location = new System.Drawing.Point(394, 148);
+            this.Carre.Name = "Carre";
+            this.Carre.Size = new System.Drawing.Size(44, 13);
+            this.Carre.TabIndex = 21;
+            this.Carre.Tag = "";
+            this.Carre.Text = "Carré: 0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 292);
+            this.Controls.Add(this.Carre);
+            this.Controls.Add(this.ThreeOfAKind);
+            this.Controls.Add(this.Yahtzee);
             this.Controls.Add(this.LargeStraight);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.SmallStraight);
@@ -294,6 +332,9 @@ namespace Yahtzeespel
         private System.Windows.Forms.Label SmallStraight;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label LargeStraight;
+        private System.Windows.Forms.Label Yahtzee;
+        private System.Windows.Forms.Label ThreeOfAKind;
+        private System.Windows.Forms.Label Carre;
     }
 }
 
