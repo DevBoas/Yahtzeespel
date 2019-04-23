@@ -16,16 +16,42 @@ namespace Yahtzeespel
         public Form1()
         {
             InitializeComponent();
+            RandomizeDice();
         }
+
+        private void RandomizeDice()
+        {
+            Random rnd = new Random();
+            foreach (Control c in Controls)
+            {
+                if (c.GetType() == typeof(PictureBox))
+                {
+                    PictureBox pic = (PictureBox)c;
+                    if (pic.BackColor == SystemColors.Control)
+                    {
+                        int dice = rnd.Next(1, 7);
+                        object O = Resources.ResourceManager.GetObject("Dice" + dice.ToString());
+                        pic.Image = (Image)O;
+                        pic.Image.Tag = dice.ToString();
+                    }
+                }
+            }
+        }
+
         int rolls = 3;
+        int gameRound = 1;
         Boolean newGame = false;
+        Boolean scored = false;
         private void DiceClick(object sender, EventArgs e)
         {
-            PictureBox pic = (PictureBox)sender;
-            if (pic.BackColor == Color.Red)
-                pic.BackColor = SystemColors.Control;
-            else
-                pic.BackColor = Color.Red;
+            if (rolls < 3)
+            {
+                PictureBox pic = (PictureBox)sender;
+                if (pic.BackColor == Color.Red)
+                    pic.BackColor = SystemColors.Control;
+                else
+                    pic.BackColor = Color.Red;
+            }
         }
 
         private void EndOfGame()
@@ -204,7 +230,7 @@ namespace Yahtzeespel
                 if (gooit > 0)
                 {
                     rolls--;
-                    UserRollsDisplay.Text = "Rolls left: " + rolls.ToString();
+                    UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
                 }
             }
             if (rolls == 0)
@@ -220,15 +246,69 @@ namespace Yahtzeespel
                 EndOfGame();
             }
         }
-
-        private void Yahtzee_Click(object sender, EventArgs e)
+        private int getSubstringPosNumber(Label lab)
         {
-
+            int loc = 0;
+            for (int i = 0; i < lab.Text.Length; i++)
+            {
+                if (lab.Text[i].ToString() == ":")
+                {
+                    loc = i;
+                    break;
+                }
+            }
+            return loc;
         }
 
-        private void LargeStraight_Click(object sender, EventArgs e)
+        private void nextRound()
         {
+            if (gameRound < 13)
+            {
+                gameRound++;
+                // reset scoreboard to default
+                foreach (Control c in Controls)
+                {
+                    if (c.GetType() == typeof(Label))
+                    {
+                        Label lab = (Label)c;
+                        if (lab.Tag != null)
+                        {
+                            if ((getSubstringPosNumber(lab) != 0) && (lab.Name != "Score"))
+                            {
+                                lab.Text = lab.Text.Substring(0, getSubstringPosNumber(lab) + 2) + "0";
+                            }
+                        }
+                    }
+                }
+                // clear dice;
+                foreach (Control c in Controls)
+                {
+                    if (c.GetType() == typeof(PictureBox))
+                    {
+                        PictureBox pic = (PictureBox)c;
+                        pic.BackColor = SystemColors.Control;
+                    }
+                }
+                Round.Text = "Round " + gameRound.ToString();
+                rolls = 3;
+                UserRollsDisplay.Text = "Rolls left: " + rolls.ToString();
+                newGame = false;
+                scored = false;
+            }
+        }
 
+        private void Addscore(object sender, EventArgs e)
+        {
+            if (!scored)
+            {
+                scored = true;
+                Label lab = (sender as Label);
+                int number = System.Convert.ToInt32(lab.Text.Substring(getSubstringPosNumber(lab) + 1));
+                int scoreNumber = System.Convert.ToInt32(Score.Text.Substring(getSubstringPosNumber(Score) + 1));
+                int totalScore = number + scoreNumber;
+                Score.Text = Score.Text.Substring(0, getSubstringPosNumber(Score) + 2) + totalScore.ToString();
+                nextRound();
+            }
         }
     }
 }

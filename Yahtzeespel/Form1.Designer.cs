@@ -36,7 +36,7 @@ namespace Yahtzeespel
             this.Btn_RollDice = new System.Windows.Forms.Button();
             this.UserRollsDisplay = new System.Windows.Forms.Label();
             this.Stoppen = new System.Windows.Forms.Button();
-            this.Score = new System.Windows.Forms.Label();
+            this.Score1 = new System.Windows.Forms.Label();
             this.Score2 = new System.Windows.Forms.Label();
             this.Score3 = new System.Windows.Forms.Label();
             this.Score6 = new System.Windows.Forms.Label();
@@ -50,6 +50,8 @@ namespace Yahtzeespel
             this.Carre = new System.Windows.Forms.Label();
             this.Chance = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.Round = new System.Windows.Forms.Label();
+            this.Score = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Dice2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice4)).BeginInit();
@@ -126,11 +128,11 @@ namespace Yahtzeespel
             // UserRollsDisplay
             // 
             this.UserRollsDisplay.AutoSize = true;
-            this.UserRollsDisplay.Location = new System.Drawing.Point(93, 115);
+            this.UserRollsDisplay.Location = new System.Drawing.Point(227, 9);
             this.UserRollsDisplay.Name = "UserRollsDisplay";
-            this.UserRollsDisplay.Size = new System.Drawing.Size(59, 13);
+            this.UserRollsDisplay.Size = new System.Drawing.Size(56, 13);
             this.UserRollsDisplay.TabIndex = 7;
-            this.UserRollsDisplay.Text = "Rolls left: 3";
+            this.UserRollsDisplay.Text = "Rolls left 3";
             // 
             // Stoppen
             // 
@@ -138,19 +140,20 @@ namespace Yahtzeespel
             this.Stoppen.Name = "Stoppen";
             this.Stoppen.Size = new System.Drawing.Size(75, 23);
             this.Stoppen.TabIndex = 8;
-            this.Stoppen.Text = "Stoppen";
+            this.Stoppen.Text = "Score";
             this.Stoppen.UseVisualStyleBackColor = true;
             this.Stoppen.Click += new System.EventHandler(this.Stoppen_Click);
             // 
-            // Score
+            // Score1
             // 
-            this.Score.AutoSize = true;
-            this.Score.Location = new System.Drawing.Point(330, 29);
-            this.Score.Name = "Score";
-            this.Score.Size = new System.Drawing.Size(44, 13);
-            this.Score.TabIndex = 9;
-            this.Score.Tag = "1";
-            this.Score.Text = "Ones: 0";
+            this.Score1.AutoSize = true;
+            this.Score1.Location = new System.Drawing.Point(330, 29);
+            this.Score1.Name = "Score1";
+            this.Score1.Size = new System.Drawing.Size(44, 13);
+            this.Score1.TabIndex = 9;
+            this.Score1.Tag = "1";
+            this.Score1.Text = "Ones: 0";
+            this.Score1.Click += new System.EventHandler(this.Addscore);
             // 
             // Score2
             // 
@@ -161,6 +164,7 @@ namespace Yahtzeespel
             this.Score2.TabIndex = 10;
             this.Score2.Tag = "2";
             this.Score2.Text = "Twos: 0";
+            this.Score2.Click += new System.EventHandler(this.Addscore);
             // 
             // Score3
             // 
@@ -171,6 +175,7 @@ namespace Yahtzeespel
             this.Score3.TabIndex = 11;
             this.Score3.Tag = "3";
             this.Score3.Text = "Threes: 0";
+            this.Score3.Click += new System.EventHandler(this.Addscore);
             // 
             // Score6
             // 
@@ -181,6 +186,7 @@ namespace Yahtzeespel
             this.Score6.TabIndex = 14;
             this.Score6.Tag = "6";
             this.Score6.Text = "Sixes: 0";
+            this.Score6.Click += new System.EventHandler(this.Addscore);
             // 
             // Score5
             // 
@@ -191,6 +197,7 @@ namespace Yahtzeespel
             this.Score5.TabIndex = 13;
             this.Score5.Tag = "5";
             this.Score5.Text = "Fives: 0";
+            this.Score5.Click += new System.EventHandler(this.Addscore);
             // 
             // Score4
             // 
@@ -201,6 +208,7 @@ namespace Yahtzeespel
             this.Score4.TabIndex = 12;
             this.Score4.Tag = "4";
             this.Score4.Text = "Fours: 0";
+            this.Score4.Click += new System.EventHandler(this.Addscore);
             // 
             // label7
             // 
@@ -221,6 +229,7 @@ namespace Yahtzeespel
             this.SmallStraight.TabIndex = 16;
             this.SmallStraight.Tag = "";
             this.SmallStraight.Text = "Small straight: 0";
+            this.SmallStraight.Click += new System.EventHandler(this.Addscore);
             // 
             // LargeStraight
             // 
@@ -231,7 +240,7 @@ namespace Yahtzeespel
             this.LargeStraight.TabIndex = 18;
             this.LargeStraight.Tag = "";
             this.LargeStraight.Text = "Large straight: 0";
-            this.LargeStraight.Click += new System.EventHandler(this.LargeStraight_Click);
+            this.LargeStraight.Click += new System.EventHandler(this.Addscore);
             // 
             // Yahtzee
             // 
@@ -242,7 +251,7 @@ namespace Yahtzeespel
             this.Yahtzee.TabIndex = 19;
             this.Yahtzee.Tag = "";
             this.Yahtzee.Text = "Yahtzee: 0";
-            this.Yahtzee.Click += new System.EventHandler(this.Yahtzee_Click);
+            this.Yahtzee.Click += new System.EventHandler(this.Addscore);
             // 
             // ThreeOfAKind
             // 
@@ -253,6 +262,7 @@ namespace Yahtzeespel
             this.ThreeOfAKind.TabIndex = 20;
             this.ThreeOfAKind.Tag = "";
             this.ThreeOfAKind.Text = "Three of a kind: 0";
+            this.ThreeOfAKind.Click += new System.EventHandler(this.Addscore);
             // 
             // Carre
             // 
@@ -263,6 +273,7 @@ namespace Yahtzeespel
             this.Carre.TabIndex = 21;
             this.Carre.Tag = "";
             this.Carre.Text = "Carré: 0";
+            this.Carre.Click += new System.EventHandler(this.Addscore);
             // 
             // Chance
             // 
@@ -273,6 +284,7 @@ namespace Yahtzeespel
             this.Chance.TabIndex = 22;
             this.Chance.Tag = "";
             this.Chance.Text = "Chance: 0";
+            this.Chance.Click += new System.EventHandler(this.Addscore);
             // 
             // label2
             // 
@@ -284,11 +296,32 @@ namespace Yahtzeespel
             this.label2.TabIndex = 17;
             this.label2.Text = "Combo";
             // 
+            // Round
+            // 
+            this.Round.AutoSize = true;
+            this.Round.Location = new System.Drawing.Point(14, 9);
+            this.Round.Name = "Round";
+            this.Round.Size = new System.Drawing.Size(48, 13);
+            this.Round.TabIndex = 23;
+            this.Round.Text = "Round 1";
+            // 
+            // Score
+            // 
+            this.Score.AutoSize = true;
+            this.Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Score.Location = new System.Drawing.Point(374, 117);
+            this.Score.Name = "Score";
+            this.Score.Size = new System.Drawing.Size(57, 16);
+            this.Score.TabIndex = 24;
+            this.Score.Text = "Score: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 157);
+            this.Controls.Add(this.Score);
+            this.Controls.Add(this.Round);
             this.Controls.Add(this.Chance);
             this.Controls.Add(this.Carre);
             this.Controls.Add(this.ThreeOfAKind);
@@ -302,7 +335,7 @@ namespace Yahtzeespel
             this.Controls.Add(this.Score4);
             this.Controls.Add(this.Score3);
             this.Controls.Add(this.Score2);
-            this.Controls.Add(this.Score);
+            this.Controls.Add(this.Score1);
             this.Controls.Add(this.Stoppen);
             this.Controls.Add(this.UserRollsDisplay);
             this.Controls.Add(this.Btn_RollDice);
@@ -334,7 +367,7 @@ namespace Yahtzeespel
         private System.Windows.Forms.Button Btn_RollDice;
         private System.Windows.Forms.Label UserRollsDisplay;
         private System.Windows.Forms.Button Stoppen;
-        private System.Windows.Forms.Label Score;
+        private System.Windows.Forms.Label Score1;
         private System.Windows.Forms.Label Score2;
         private System.Windows.Forms.Label Score3;
         private System.Windows.Forms.Label Score6;
@@ -348,6 +381,8 @@ namespace Yahtzeespel
         private System.Windows.Forms.Label Carre;
         private System.Windows.Forms.Label Chance;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Round;
+        private System.Windows.Forms.Label Score;
     }
 }
 
