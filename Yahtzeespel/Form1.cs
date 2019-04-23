@@ -33,7 +33,6 @@ namespace Yahtzeespel
             if (!newGame)
             {
                 newGame = true;
-                MessageBox.Show("Truly is the end");
                 UpdateScoreBoard();
             }
         }
