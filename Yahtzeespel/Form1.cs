@@ -30,6 +30,38 @@ namespace Yahtzeespel
         private void EndOfGame()
         {
             MessageBox.Show("Truly is the end");
+            UpdateScoreBoard();
+        }
+
+        private void UpdateScoreBoard()
+        {
+            foreach (Control c in Controls)
+            {
+                if (c.GetType() == typeof(PictureBox))
+                {
+                    PictureBox pic = (PictureBox)c;
+                    String tag = pic.Image.Tag.ToString();
+                    MessageBox.Show("Tag1 = " + tag);
+                    foreach (Control c2 in Controls)
+                    {
+                        if (c2.GetType() == typeof(Label))
+                        {
+                            Label lab = (Label)c2;
+                            if (lab.Tag != null)
+                            {
+                                String tag2 = lab.Tag.ToString();
+                                if (tag2 == tag)
+                                {
+                                    int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length-1));
+                                    //MessageBox.Show("Number = " + number.ToString());
+                                    number++;
+                                    lab.Text = lab.Text.Substring(0, lab.Text.Length - 1) + number.ToString();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         
         private void RollDice(object sender, EventArgs e)
@@ -48,6 +80,7 @@ namespace Yahtzeespel
                             int dice = rnd.Next(1, 7);
                             object O = Resources.ResourceManager.GetObject("Dice" + dice.ToString());
                             pic.Image = (Image)O;
+                            pic.Image.Tag = dice.ToString();
                             gooit++;
                         }
                     }
