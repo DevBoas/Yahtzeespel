@@ -40,7 +40,6 @@ namespace Yahtzeespel
 
         int rolls = 3;
         int gameRound = 1;
-        Boolean YahtzeeBonus = false;
         Boolean newGame = false;
         Boolean scored = false;
         private void DiceClick(object sender, EventArgs e)
@@ -108,11 +107,11 @@ namespace Yahtzeespel
             //MessageBox.Show("Steps = " + biggestStep.ToString());
             //MessageBox.Show(SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1));
             if ((Fullhouse.Tag.ToString() != "X") && (same == 4))
-                Fullhouse.Text = Fullhouse.Text.Substring(0, Fullhouse.Text.Length - 1) + "25";
+                Fullhouse.Text = Fullhouse.Text.Substring(0, getSubstringPosNumber(Fullhouse) + 2) + "25";
             if ((SmallStraight.Tag.ToString() != "X") && (steps > 3))
-                SmallStraight.Text = SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1) + "30";
+                SmallStraight.Text = SmallStraight.Text.Substring(0, getSubstringPosNumber(SmallStraight) + 2) + "30";
             if ((LargeStraight.Tag.ToString() != "X") && (steps > 4))
-                LargeStraight.Text = LargeStraight.Text.Substring(0, LargeStraight.Text.Length - 1) + "40";
+                LargeStraight.Text = LargeStraight.Text.Substring(0, getSubstringPosNumber(LargeStraight) + 2) + "40";
             //MessageBox.Show(i + " place is = " + dices[i].ToString());
         }
 
@@ -152,7 +151,7 @@ namespace Yahtzeespel
             }
             //MessageBox.Show("Total amount = " + total.ToString());
             if ((Carre.Tag.ToString() != "X") && (highestCount >= 4))
-                Carre.Text = Carre.Text.Substring(0, Carre.Text.Length - 1) + total.ToString();
+                Carre.Text = Carre.Text.Substring(0, getSubstringPosNumber(Carre) + 2) + total.ToString();
         }
 
         private void CheckForThreeOfAKind()
@@ -191,7 +190,7 @@ namespace Yahtzeespel
             }
             //MessageBox.Show("Total amount = " + total.ToString());
             if ((ThreeOfAKind.Tag.ToString() != "X") && (highestCount >= 3))
-                ThreeOfAKind.Text = ThreeOfAKind.Text.Substring(0, ThreeOfAKind.Text.Length - 1) + total.ToString();
+                ThreeOfAKind.Text = ThreeOfAKind.Text.Substring(0, getSubstringPosNumber(ThreeOfAKind) + 2) + total.ToString();
         }
 
         private void CheckForYahtzee()
@@ -219,15 +218,7 @@ namespace Yahtzeespel
             {
                 if (Yahtzee.Tag.ToString() != "X")
                 {
-                    if (YahtzeeBonus)
-                    {
-                        Yahtzee.Text = Yahtzee.Text.Substring(0, Yahtzee.Text.Length - 1) + "100 ";
-                    }
-                    else
-                    {
-                        Yahtzee.Text = Yahtzee.Text.Substring(0, Yahtzee.Text.Length - 1) + "50";
-                        YahtzeeBonus = true;
-                    }
+                    Yahtzee.Text = Yahtzee.Text.Substring(0, getSubstringPosNumber(Yahtzee) + 2) + "50";
                 }
             }
             //MessageBox.Show("Count = " + count.ToString());
@@ -246,7 +237,7 @@ namespace Yahtzeespel
                 }
             }
             if (Chance.Tag.ToString() != "X")
-                Chance.Text = Chance.Text.Substring(0, Chance.Text.Length - 1) + total.ToString();
+                Chance.Text = Chance.Text.Substring(0, getSubstringPosNumber(Chance) + 2) + total.ToString();
         }
         private void UpdateScoreBoard()
         {
@@ -271,7 +262,7 @@ namespace Yahtzeespel
                                     //MessageBox.Show("NowNumber = " + number.ToString());
                                     int diceNumber = System.Convert.ToInt32(tag.ToString());
                                     //MessageBox.Show("to add dicenumb = " + diceNumber.ToString());
-                                    lab.Text = lab.Text.Substring(0, lab.Text.Length - 1) + (number + diceNumber);
+                                    lab.Text = lab.Text.Substring(0, getSubstringPosNumber(lab) + 2) + (number + diceNumber);
                                 }
                             }
                         }
@@ -362,20 +353,22 @@ namespace Yahtzeespel
                     pic.BackColor = SystemColors.Control;
                 }
             }
-            gameRound++;
             if (gameRound < 13)
+            {
                 rolls = 3;
+                gameRound++;
+            }
             else
                 rolls = 0;
             Round.Text = "Round " + gameRound.ToString();
-            if (gameRound < 13)
+            //MessageBox.Show("gameRound " + gameRound.ToString() + " rolls = " + rolls.ToString());
+            if (gameRound <= 13)
             {
                 newGame = false;
                 scored = false;
             }
-            else if (gameRound == 13)
+            if ((gameRound == 13) && (rolls == 0))
             {
-                scored = false;
                 Btn_RollDice.Text = "New game";
             }
             UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
@@ -383,7 +376,7 @@ namespace Yahtzeespel
 
         private void Addscore(object sender, EventArgs e)
         {
-            if (!scored)
+            if (rolls != 3)
             {
                 Label lab = (sender as Label);
                 if (lab.Tag.ToString() != "X")
