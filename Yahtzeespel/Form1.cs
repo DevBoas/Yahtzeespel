@@ -41,7 +41,7 @@ namespace Yahtzeespel
         int rolls = 3;
         int gameRound = 1;
         Boolean newGame = false;
-        Boolean scored = false;
+
         private void DiceClick(object sender, EventArgs e)
         {
             if (rolls < 3)
@@ -54,7 +54,35 @@ namespace Yahtzeespel
             }
         }
 
-        private void EndOfGame()
+        private void ResetGame()
+        {
+            Btn_RollDice.Text = "Roll dice";
+            rolls = 3;
+            gameRound = 1;
+            newGame = false;
+            UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
+            Round.Text = "Rolls left " + rolls.ToString();
+            Round.Text = "Round " + gameRound.ToString();
+            Score.Text = Score.Text.Substring(0, getSubstringPosNumber(Score) + 2) + "0";
+            foreach (Control c in Controls)
+            {
+                if (c.GetType() == typeof(Label))
+                {
+                    Label lab = (Label)c;
+                    if (lab.ForeColor == Color.Red)
+                    {
+                        if (lab.Name.Substring(0, lab.Name.Length - 1) == "Score")
+                            lab.Tag = lab.Name[lab.Name.Length - 1].ToString();
+                        else
+                            lab.Tag = "";
+                        lab.ForeColor = SystemColors.ControlText;
+                    }
+                }
+            }
+            ResetScoreBoard();
+        }
+
+        private void EndOfRound()
         {
             if (!newGame)
             {
@@ -278,35 +306,43 @@ namespace Yahtzeespel
         
         private void RollDice(object sender, EventArgs e)
         {
-            if (rolls > 0)
+            Button btn = (sender as Button);
+            if (btn.Text == "Roll dice")
             {
-                int gooit = 0; 
-                Random rnd = new Random();
-                foreach (Control c in Controls)
+                if (rolls > 0)
                 {
-                    if (c.GetType() == typeof(PictureBox))
+                    int gooit = 0;
+                    Random rnd = new Random();
+                    foreach (Control c in Controls)
                     {
-                        PictureBox pic = (PictureBox)c;
-                        if (pic.BackColor == SystemColors.Control)
+                        if (c.GetType() == typeof(PictureBox))
                         {
-                            int dice = rnd.Next(1, 7);
-                            object O = Resources.ResourceManager.GetObject("Dice" + dice.ToString());
-                            pic.Image = (Image)O;
-                            pic.Image.Tag = dice.ToString();
-                            gooit++;
+                            PictureBox pic = (PictureBox)c;
+                            if (pic.BackColor == SystemColors.Control)
+                            {
+                                int dice = rnd.Next(1, 7);
+                                object O = Resources.ResourceManager.GetObject("Dice" + dice.ToString());
+                                pic.Image = (Image)O;
+                                pic.Image.Tag = dice.ToString();
+                                gooit++;
+                            }
                         }
                     }
+                    if (gooit > 0)
+                    {
+                        ResetScoreBoard();
+                        UpdateScoreBoard();
+                        rolls--;
+                        UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
+                    }
                 }
-                if (gooit > 0)
-                {
-                    ResetScoreBoard();
-                    UpdateScoreBoard();
-                    rolls--;
-                    UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
-                }
+                else
+                    EndOfRound();
             }
-            if (rolls == 0)
-                EndOfGame();
+            else
+            {
+                ResetGame();
+            }
         }
 
         private int getSubstringPosNumber(Label lab)
@@ -365,7 +401,6 @@ namespace Yahtzeespel
             if (gameRound <= 13)
             {
                 newGame = false;
-                scored = false;
             }
             if ((gameRound == 13) && (rolls == 0))
             {
@@ -381,7 +416,6 @@ namespace Yahtzeespel
                 Label lab = (sender as Label);
                 if (lab.Tag.ToString() != "X")
                 {
-                    scored = true;
                     lab.ForeColor = Color.Red;
                     lab.Tag = "X";
                     int number = System.Convert.ToInt32(lab.Text.Substring(getSubstringPosNumber(lab) + 1));
