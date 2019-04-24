@@ -40,6 +40,7 @@ namespace Yahtzeespel
 
         int rolls = 3;
         int gameRound = 1;
+        Boolean YahtzeeBonus = false;
         Boolean newGame = false;
         Boolean scored = false;
         private void DiceClick(object sender, EventArgs e)
@@ -65,109 +66,135 @@ namespace Yahtzeespel
 
         private void CheckForStraight()
         {
-            int count = 0;
-            foreach (Control c in Controls)
-            {
-                if (c.GetType() == typeof(Label))
-                {
-                    Label lab = (Label)c;
-                    if (lab.Tag != null && lab.Tag.ToString() != String.Empty)
-                    {
-                        String tag = lab.Tag.ToString();
-                        int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length - 1));
-                        if (number > 0)
-                            count++;
-                        else
-                            count = 0;
-                        if (count == 4)
-                            SmallStraight.Text = SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1) + "30";
-                        else if(count == 5)
-                            LargeStraight.Text = LargeStraight.Text.Substring(0, LargeStraight.Text.Length - 1) + "40";
-                        //MessageBox.Show("Tag = " + tag);
-                    }
-                }
-            }
         }
+
         private void CheckForCarrre()
         {
-            Boolean found = false;
+            int[] dices = new int[5];
+            int index = 0;
+            int highestCount = 0;
+            int count = 0;
             int total = 0;
             foreach (Control c in Controls)
             {
-                if (c.GetType() == typeof(Label))
+                if (c.GetType() == typeof(PictureBox))
                 {
-                    Label lab = (Label)c;
-                    if (lab.Tag != null && lab.Tag.ToString() != String.Empty)
-                    {
-                        String tag = lab.Tag.ToString();
-                        int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length - 1));
-                        total += number * System.Convert.ToInt32(tag);
-                        if (number == 4)
-                            found = true;
-                    }
+                    PictureBox pic = (PictureBox)c;
+                    int DiceNumber = System.Convert.ToInt32(pic.Image.Tag);
+                    dices[index] = DiceNumber;
+                    index++;
                 }
             }
-            if (found)
+            for (int i = 1; i < 7; i++)
+            {
+                for (int y = 0; y < dices.Length; y++)
+                {
+                    if (dices[y] == i)
+                        count++;
+                }
+                if (count > highestCount)
+                    highestCount = count;
+                count = 0;
+            }
+            //MessageBox.Show("Highest int = " + highestCountNum.ToString());
+            //MessageBox.Show("Highest amount = " + highestCount.ToString());
+            for (int y = 0; y < dices.Length; y++)
+            {
+                total += dices[y];
+            }
+            //MessageBox.Show("Total amount = " + total.ToString());
+            int num = System.Convert.ToInt32(ThreeOfAKind.Text.Substring(getSubstringPosNumber(ThreeOfAKind) + 1));
+            if ((num == 0) && (highestCount >= 4))
                 Carre.Text = Carre.Text.Substring(0, Carre.Text.Length - 1) + total.ToString();
         }
 
         private void CheckForThreeOfAKind()
         {
-            Boolean found = false;
+            int[] dices = new int[5];
+            int index = 0;
+            int highestCount = 0;
+            int count = 0;
             int total = 0;
             foreach (Control c in Controls)
             {
-                if (c.GetType() == typeof(Label))
+                if (c.GetType() == typeof(PictureBox))
                 {
-                    Label lab = (Label)c;
-                    if (lab.Tag != null && lab.Tag.ToString() != String.Empty)
-                    {
-                        String tag = lab.Tag.ToString();
-                        int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length - 1));
-                        total += number * System.Convert.ToInt32(tag);
-                        if (number == 3)
-                            found = true;
-                    }
+                    PictureBox pic = (PictureBox)c;
+                    int DiceNumber = System.Convert.ToInt32(pic.Image.Tag);
+                    dices[index] = DiceNumber;
+                    index++;
                 }
             }
-            if (found)
+            for (int i = 1; i < 7; i++)
+            {
+                for (int y = 0; y < dices.Length; y++)
+                {
+                    if (dices[y] == i)
+                        count++;
+                }
+                if (count > highestCount)
+                    highestCount = count;
+                count = 0;
+            }
+            //MessageBox.Show("Highest int = " + highestCountNum.ToString());
+            //MessageBox.Show("Highest amount = " + highestCount.ToString());
+            for (int y = 0; y < dices.Length; y++)
+            {
+                total += dices[y];
+            }
+            //MessageBox.Show("Total amount = " + total.ToString());
+            int num = System.Convert.ToInt32(ThreeOfAKind.Text.Substring(getSubstringPosNumber(ThreeOfAKind) + 1));
+            if ((num == 0) && (highestCount >= 3))
                 ThreeOfAKind.Text = ThreeOfAKind.Text.Substring(0, ThreeOfAKind.Text.Length - 1) + total.ToString();
         }
 
         private void CheckForYahtzee()
         {
-            foreach (Control c2 in Controls)
+            int[] dices = new int[5];
+            int index = 0;
+            int count = 1;
+            foreach (Control c in Controls)
             {
-                if (c2.GetType() == typeof(Label))
+                if (c.GetType() == typeof(PictureBox))
                 {
-                    Label lab = (Label)c2;
-                    if (lab.Tag != null && lab.Tag.ToString() != String.Empty)
-                    {
-                        String tag = lab.Tag.ToString();
-                        int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length - 1));
-                        if (number == 5)
-                            Yahtzee.Text = Yahtzee.Text.Substring(0, Yahtzee.Text.Length - 1) + "50";
-                    }
+                    PictureBox pic = (PictureBox)c;
+                    int DiceNumber = System.Convert.ToInt32(pic.Image.Tag);
+                    dices[index] = DiceNumber;
+                    index++;
                 }
             }
+            for (int i = 0; i < dices.Length; i++)
+            {
+               if (i > 0)
+                if (dices[i] == dices[i - 1])
+                    count++;
+            }
+            if (count == 5)
+            {
+                int num = System.Convert.ToInt32(Yahtzee.Text.Substring(getSubstringPosNumber(Yahtzee) + 1));
+                if (num == 0)
+                    Yahtzee.Text = Yahtzee.Text.Substring(0, Yahtzee.Text.Length - 1) + "50";
+            }
+            //MessageBox.Show("Count = " + count.ToString());
         }
         private void CheckForChance()
         {
             int total = 0;
+            //int[] dices = new int[5];
             foreach (Control c in Controls)
             {
-                if (c.GetType() == typeof(Label))
+                if (c.GetType() == typeof(PictureBox))
                 {
-                    Label lab = (Label)c;
-                    if (lab.Tag != null && lab.Tag.ToString() != String.Empty)
-                    {
-                        String tag = lab.Tag.ToString();
-                        int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length - 1));
-                        total += number * System.Convert.ToInt32(tag);
-                    }
+                    PictureBox pic = (PictureBox)c;
+                    int DiceNumber = System.Convert.ToInt32(pic.Image.Tag);
+                    total += DiceNumber;
                 }
             }
-            Chance.Text = Chance.Text.Substring(0, Chance.Text.Length - 1) + total.ToString();
+            int num = System.Convert.ToInt32(Chance.Text.Substring(getSubstringPosNumber(Chance) + 1));
+            if (num == 0)
+            {
+                Chance.Text = Chance.Text.Substring(0, Chance.Text.Length - 1) + total.ToString();
+            }
         }
         private void UpdateScoreBoard()
         {
@@ -262,38 +289,44 @@ namespace Yahtzeespel
 
         private void nextRound()
         {
-            if (gameRound < 13)
+
+            // reset scoreboard to default
+            foreach (Control c in Controls)
             {
-                gameRound++;
-                // reset scoreboard to default
-                foreach (Control c in Controls)
+                if (c.GetType() == typeof(Label))
                 {
-                    if (c.GetType() == typeof(Label))
+                    Label lab = (Label)c;
+                    if (lab.Tag != null)
                     {
-                        Label lab = (Label)c;
-                        if (lab.Tag != null)
+                        if ((getSubstringPosNumber(lab) != 0) && (lab.Name != "Score") && lab.Tag.ToString() != "X")
                         {
-                            if ((getSubstringPosNumber(lab) != 0) && (lab.Name != "Score"))
-                            {
-                                lab.Text = lab.Text.Substring(0, getSubstringPosNumber(lab) + 2) + "0";
-                            }
+                            lab.Text = lab.Text.Substring(0, getSubstringPosNumber(lab) + 2) + "0";
                         }
                     }
                 }
-                // clear dice;
-                foreach (Control c in Controls)
+            }
+            // clear dice;
+            foreach (Control c in Controls)
+            {
+                if (c.GetType() == typeof(PictureBox))
                 {
-                    if (c.GetType() == typeof(PictureBox))
-                    {
-                        PictureBox pic = (PictureBox)c;
-                        pic.BackColor = SystemColors.Control;
-                    }
+                    PictureBox pic = (PictureBox)c;
+                    pic.BackColor = SystemColors.Control;
                 }
+            }
+            if (gameRound < 13)
+            {
+                gameRound++;
                 Round.Text = "Round " + gameRound.ToString();
                 rolls = 3;
                 UserRollsDisplay.Text = "Rolls left: " + rolls.ToString();
                 newGame = false;
                 scored = false;
+            }
+            else if (gameRound == 13)
+            {
+                scored = false;
+                Btn_RollDice.Text = "New game";
             }
         }
 
@@ -303,6 +336,8 @@ namespace Yahtzeespel
             {
                 scored = true;
                 Label lab = (sender as Label);
+                lab.ForeColor = Color.Red;
+                lab.Tag = "X";
                 int number = System.Convert.ToInt32(lab.Text.Substring(getSubstringPosNumber(lab) + 1));
                 int scoreNumber = System.Convert.ToInt32(Score.Text.Substring(getSubstringPosNumber(Score) + 1));
                 int totalScore = number + scoreNumber;

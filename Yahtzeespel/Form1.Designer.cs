@@ -346,7 +346,7 @@ namespace Yahtzeespel
             this.Controls.Add(this.Dice2);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Yahtzee";
             ((System.ComponentModel.ISupportInitialize)(this.Dice2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice4)).EndInit();
