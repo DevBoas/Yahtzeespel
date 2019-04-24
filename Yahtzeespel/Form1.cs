@@ -71,6 +71,7 @@ namespace Yahtzeespel
             int index = 0;
             int steps = 1;
             int biggestStep = 1;
+            int same = 1;
             for (int i = 1; i < 7; i++)
             {
                 foreach (Control c in Controls)
@@ -95,19 +96,24 @@ namespace Yahtzeespel
                     int thisStep = dices[i] - dices[i - 1];
                     if (thisStep == 1)
                         steps++;
+                    else if (thisStep == 0)
+                        same++;
                     else
                         steps = 1;
                     if (steps > biggestStep)
                         biggestStep = steps;
                 }
-                //MessageBox.Show("Steps = " + biggestStep.ToString());
-                if ((SmallStraight.Tag.ToString() != "X") && (steps > 3))
-                    SmallStraight.Text = SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1) + "30";
-                if ((LargeStraight.Tag.ToString() != "X") && (steps > 4))
-                    LargeStraight.Text = LargeStraight.Text.Substring(0, LargeStraight.Text.Length - 1) + "40";
-                //MessageBox.Show(i + " place is = " + dices[i].ToString());
             }
-            
+            //MessageBox.Show("Same = " + same.ToString());
+            //MessageBox.Show("Steps = " + biggestStep.ToString());
+            //MessageBox.Show(SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1));
+            if ((Fullhouse.Tag.ToString() != "X") && (same == 4))
+                Fullhouse.Text = Fullhouse.Text.Substring(0, Fullhouse.Text.Length - 1) + "25";
+            if ((SmallStraight.Tag.ToString() != "X") && (steps > 3))
+                SmallStraight.Text = SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1) + "30";
+            if ((LargeStraight.Tag.ToString() != "X") && (steps > 4))
+                LargeStraight.Text = LargeStraight.Text.Substring(0, LargeStraight.Text.Length - 1) + "40";
+            //MessageBox.Show(i + " place is = " + dices[i].ToString());
         }
 
         private void CheckForCarrre()
@@ -244,7 +250,6 @@ namespace Yahtzeespel
         }
         private void UpdateScoreBoard()
         {
-
             foreach (Control c in Controls)
             {
                 if (c.GetType() == typeof(PictureBox))

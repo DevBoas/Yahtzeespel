@@ -51,6 +51,7 @@ namespace Yahtzeespel
             this.label2 = new System.Windows.Forms.Label();
             this.Round = new System.Windows.Forms.Label();
             this.Score = new System.Windows.Forms.Label();
+            this.Fullhouse = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Dice2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice4)).BeginInit();
@@ -267,7 +268,7 @@ namespace Yahtzeespel
             // Chance
             // 
             this.Chance.AutoSize = true;
-            this.Chance.Location = new System.Drawing.Point(437, 94);
+            this.Chance.Location = new System.Drawing.Point(437, 107);
             this.Chance.Name = "Chance";
             this.Chance.Size = new System.Drawing.Size(56, 13);
             this.Chance.TabIndex = 22;
@@ -298,17 +299,28 @@ namespace Yahtzeespel
             // 
             this.Score.AutoSize = true;
             this.Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Score.Location = new System.Drawing.Point(374, 117);
+            this.Score.Location = new System.Drawing.Point(374, 132);
             this.Score.Name = "Score";
             this.Score.Size = new System.Drawing.Size(57, 16);
             this.Score.TabIndex = 24;
             this.Score.Text = "Score: 0";
+            // 
+            // Fullhouse
+            // 
+            this.Fullhouse.AutoSize = true;
+            this.Fullhouse.Location = new System.Drawing.Point(426, 94);
+            this.Fullhouse.Name = "Fullhouse";
+            this.Fullhouse.Size = new System.Drawing.Size(67, 13);
+            this.Fullhouse.TabIndex = 25;
+            this.Fullhouse.Tag = "";
+            this.Fullhouse.Text = "Full house: 0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(533, 157);
+            this.Controls.Add(this.Fullhouse);
             this.Controls.Add(this.Score);
             this.Controls.Add(this.Round);
             this.Controls.Add(this.Chance);
@@ -370,6 +382,7 @@ namespace Yahtzeespel
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label Round;
         private System.Windows.Forms.Label Score;
+        private System.Windows.Forms.Label Fullhouse;
     }
 }
 
