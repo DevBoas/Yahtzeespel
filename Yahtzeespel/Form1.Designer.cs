@@ -35,7 +35,6 @@ namespace Yahtzeespel
             this.Dice1 = new System.Windows.Forms.PictureBox();
             this.Btn_RollDice = new System.Windows.Forms.Button();
             this.UserRollsDisplay = new System.Windows.Forms.Label();
-            this.Stoppen = new System.Windows.Forms.Button();
             this.Score1 = new System.Windows.Forms.Label();
             this.Score2 = new System.Windows.Forms.Label();
             this.Score3 = new System.Windows.Forms.Label();
@@ -133,16 +132,6 @@ namespace Yahtzeespel
             this.UserRollsDisplay.Size = new System.Drawing.Size(56, 13);
             this.UserRollsDisplay.TabIndex = 7;
             this.UserRollsDisplay.Text = "Rolls left 3";
-            // 
-            // Stoppen
-            // 
-            this.Stoppen.Location = new System.Drawing.Point(211, 110);
-            this.Stoppen.Name = "Stoppen";
-            this.Stoppen.Size = new System.Drawing.Size(75, 23);
-            this.Stoppen.TabIndex = 8;
-            this.Stoppen.Text = "Score";
-            this.Stoppen.UseVisualStyleBackColor = true;
-            this.Stoppen.Click += new System.EventHandler(this.Stoppen_Click);
             // 
             // Score1
             // 
@@ -336,7 +325,6 @@ namespace Yahtzeespel
             this.Controls.Add(this.Score3);
             this.Controls.Add(this.Score2);
             this.Controls.Add(this.Score1);
-            this.Controls.Add(this.Stoppen);
             this.Controls.Add(this.UserRollsDisplay);
             this.Controls.Add(this.Btn_RollDice);
             this.Controls.Add(this.Dice1);
@@ -366,7 +354,6 @@ namespace Yahtzeespel
         private System.Windows.Forms.PictureBox Dice1;
         private System.Windows.Forms.Button Btn_RollDice;
         private System.Windows.Forms.Label UserRollsDisplay;
-        private System.Windows.Forms.Button Stoppen;
         private System.Windows.Forms.Label Score1;
         private System.Windows.Forms.Label Score2;
         private System.Windows.Forms.Label Score3;

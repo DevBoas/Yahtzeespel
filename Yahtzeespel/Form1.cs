@@ -60,12 +60,14 @@ namespace Yahtzeespel
             if (!newGame)
             {
                 newGame = true;
+                ResetScoreBoard();
                 UpdateScoreBoard();
             }
         }
 
         private void CheckForStraight()
         {
+
         }
 
         private void CheckForCarrre()
@@ -170,7 +172,17 @@ namespace Yahtzeespel
             if (count == 5)
             {
                 if (Yahtzee.Tag.ToString() != "X")
-                    Yahtzee.Text = Yahtzee.Text.Substring(0, Yahtzee.Text.Length - 1) + "50";
+                {
+                    if (YahtzeeBonus)
+                    {
+                        Yahtzee.Text = Yahtzee.Text.Substring(0, Yahtzee.Text.Length - 1) + "100 ";
+                    }
+                    else
+                    {
+                        Yahtzee.Text = Yahtzee.Text.Substring(0, Yahtzee.Text.Length - 1) + "50";
+                        YahtzeeBonus = true;
+                    }
+                }
             }
             //MessageBox.Show("Count = " + count.ToString());
         }
@@ -250,6 +262,8 @@ namespace Yahtzeespel
                 }
                 if (gooit > 0)
                 {
+                    ResetScoreBoard();
+                    UpdateScoreBoard();
                     rolls--;
                     UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
                 }
@@ -258,15 +272,6 @@ namespace Yahtzeespel
                 EndOfGame();
         }
 
-        private void Stoppen_Click(object sender, EventArgs e)
-        {
-            if (rolls < 3)
-            {
-                rolls = 0;
-                UserRollsDisplay.Text = "Rolls left: " + rolls.ToString();
-                EndOfGame();
-            }
-        }
         private int getSubstringPosNumber(Label lab)
         {
             int loc = 0;
@@ -280,11 +285,8 @@ namespace Yahtzeespel
             }
             return loc;
         }
-
-        private void nextRound()
+        private void ResetScoreBoard()
         {
-
-            // reset scoreboard to default
             foreach (Control c in Controls)
             {
                 if (c.GetType() == typeof(Label))
@@ -299,6 +301,12 @@ namespace Yahtzeespel
                     }
                 }
             }
+        }
+        private void nextRound()
+        {
+
+            // reset scoreboard to default
+            ResetScoreBoard();
             // clear dice;
             foreach (Control c in Controls)
             {
@@ -308,20 +316,23 @@ namespace Yahtzeespel
                     pic.BackColor = SystemColors.Control;
                 }
             }
-            if (gameRound < 12)
-            {
-                gameRound++;
-                Round.Text = "Round " + gameRound.ToString();
+            gameRound++;
+            if (gameRound < 13)
                 rolls = 3;
-                UserRollsDisplay.Text = "Rolls left: " + rolls.ToString();
+            else
+                rolls = 0;
+            Round.Text = "Round " + gameRound.ToString();
+            if (gameRound < 13)
+            {
                 newGame = false;
                 scored = false;
             }
-            else if (gameRound == 12)
+            else if (gameRound == 13)
             {
                 scored = false;
                 Btn_RollDice.Text = "New game";
             }
+            UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
         }
 
         private void Addscore(object sender, EventArgs e)
