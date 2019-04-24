@@ -314,6 +314,7 @@ namespace Yahtzeespel
             this.Fullhouse.TabIndex = 25;
             this.Fullhouse.Tag = "";
             this.Fullhouse.Text = "Full house: 0";
+            this.Fullhouse.Click += new System.EventHandler(this.Addscore);
             // 
             // Form1
             // 
