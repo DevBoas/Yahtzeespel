@@ -213,7 +213,7 @@ namespace Yahtzeespel
             // SmallStraight
             // 
             this.SmallStraight.AutoSize = true;
-            this.SmallStraight.Location = new System.Drawing.Point(412, 55);
+            this.SmallStraight.Location = new System.Drawing.Point(412, 66);
             this.SmallStraight.Name = "SmallStraight";
             this.SmallStraight.Size = new System.Drawing.Size(81, 13);
             this.SmallStraight.TabIndex = 16;
@@ -224,7 +224,7 @@ namespace Yahtzeespel
             // LargeStraight
             // 
             this.LargeStraight.AutoSize = true;
-            this.LargeStraight.Location = new System.Drawing.Point(410, 68);
+            this.LargeStraight.Location = new System.Drawing.Point(410, 79);
             this.LargeStraight.Name = "LargeStraight";
             this.LargeStraight.Size = new System.Drawing.Size(83, 13);
             this.LargeStraight.TabIndex = 18;
@@ -235,7 +235,7 @@ namespace Yahtzeespel
             // Yahtzee
             // 
             this.Yahtzee.AutoSize = true;
-            this.Yahtzee.Location = new System.Drawing.Point(435, 81);
+            this.Yahtzee.Location = new System.Drawing.Point(435, 92);
             this.Yahtzee.Name = "Yahtzee";
             this.Yahtzee.Size = new System.Drawing.Size(58, 13);
             this.Yahtzee.TabIndex = 19;
@@ -268,7 +268,7 @@ namespace Yahtzeespel
             // Chance
             // 
             this.Chance.AutoSize = true;
-            this.Chance.Location = new System.Drawing.Point(437, 107);
+            this.Chance.Location = new System.Drawing.Point(437, 105);
             this.Chance.Name = "Chance";
             this.Chance.Size = new System.Drawing.Size(56, 13);
             this.Chance.TabIndex = 22;
@@ -308,7 +308,7 @@ namespace Yahtzeespel
             // Fullhouse
             // 
             this.Fullhouse.AutoSize = true;
-            this.Fullhouse.Location = new System.Drawing.Point(426, 94);
+            this.Fullhouse.Location = new System.Drawing.Point(426, 53);
             this.Fullhouse.Name = "Fullhouse";
             this.Fullhouse.Size = new System.Drawing.Size(67, 13);
             this.Fullhouse.TabIndex = 25;
