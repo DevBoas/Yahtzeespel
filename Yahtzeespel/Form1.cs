@@ -13,6 +13,10 @@ namespace Yahtzeespel
 {
     public partial class Form1 : Form
     {
+        int rolls = 3;
+        int gameRound = 1;
+        int yahtzeeRound = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -38,9 +42,6 @@ namespace Yahtzeespel
             }
         }
 
-        int rolls = 3;
-        int gameRound = 1;
-
         private void DiceClick(object sender, EventArgs e)
         {
             if (rolls < 3)
@@ -55,13 +56,13 @@ namespace Yahtzeespel
 
         private void ResetGame()
         {
-            Btn_RollDice.Text = "Roll dice";
             rolls = 3;
             gameRound = 1;
+            Btn_RollDice.Text = "Roll dice";
             UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
-            Round.Text = "Rolls left " + rolls.ToString();
             Round.Text = "Round " + gameRound.ToString();
             Score.Text = Score.Text.Substring(0, getSubstringPosNumber(Score) + 2) + "0";
+
             foreach (Control c in Controls)
             {
                 if (c.GetType() == typeof(Label))
@@ -77,6 +78,7 @@ namespace Yahtzeespel
                     }
                 }
             }
+
             ResetScoreBoard();
         }
 
@@ -232,9 +234,20 @@ namespace Yahtzeespel
             }
             if (count == 5)
             {
+                int toAdd = 50;
+                if (yahtzeeRound == 0)
+                    yahtzeeRound = gameRound;
                 if (Yahtzee.Tag.ToString() != "X")
+                    Yahtzee.Text = Yahtzee.Text.Substring(0, getSubstringPosNumber(Yahtzee) + 2) + toAdd.ToString();
+                else if (yahtzeeRound != gameRound)
                 {
-                    Yahtzee.Text = Yahtzee.Text.Substring(0, getSubstringPosNumber(Yahtzee) + 2) + "50";
+                    //joker
+                    int scoreNumber = System.Convert.ToInt32(Score.Text.Substring(getSubstringPosNumber(Score) + 1));
+                    int totalScore = 100 + scoreNumber;
+                    Fullhouse.Text = Fullhouse.Text.Substring(0, getSubstringPosNumber(Fullhouse) + 2) + "25";
+                    SmallStraight.Text = SmallStraight.Text.Substring(0, getSubstringPosNumber(SmallStraight) + 2) + "30";
+                    LargeStraight.Text = LargeStraight.Text.Substring(0, getSubstringPosNumber(LargeStraight) + 2) + "40";
+                    Score.Text = Score.Text.Substring(0, getSubstringPosNumber(Score) + 2) + totalScore.ToString();
                 }
             }
             //MessageBox.Show("Count = " + count.ToString());
@@ -288,8 +301,8 @@ namespace Yahtzeespel
             CheckForThreeOfAKind();
             CheckForCarrre();
             CheckForStraight();
-            CheckForYahtzee();
             CheckForChance();
+            CheckForYahtzee();
         }
         
         private void RollDice(object sender, EventArgs e)
@@ -346,6 +359,7 @@ namespace Yahtzeespel
             }
             return loc;
         }
+
         private void ResetScoreBoard()
         {
             foreach (Control c in Controls)
@@ -363,6 +377,7 @@ namespace Yahtzeespel
                 }
             }
         }
+
         private void nextRound()
         {
 
@@ -414,5 +429,6 @@ namespace Yahtzeespel
                 }
             }
         }
+
     }
 }

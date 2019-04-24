@@ -117,7 +117,7 @@ namespace Yahtzeespel
             // 
             // Btn_RollDice
             // 
-            this.Btn_RollDice.Location = new System.Drawing.Point(12, 110);
+            this.Btn_RollDice.Location = new System.Drawing.Point(12, 105);
             this.Btn_RollDice.Name = "Btn_RollDice";
             this.Btn_RollDice.Size = new System.Drawing.Size(75, 23);
             this.Btn_RollDice.TabIndex = 6;
@@ -128,7 +128,7 @@ namespace Yahtzeespel
             // UserRollsDisplay
             // 
             this.UserRollsDisplay.AutoSize = true;
-            this.UserRollsDisplay.Location = new System.Drawing.Point(227, 9);
+            this.UserRollsDisplay.Location = new System.Drawing.Point(233, 9);
             this.UserRollsDisplay.Name = "UserRollsDisplay";
             this.UserRollsDisplay.Size = new System.Drawing.Size(56, 13);
             this.UserRollsDisplay.TabIndex = 7;
@@ -289,7 +289,7 @@ namespace Yahtzeespel
             // Round
             // 
             this.Round.AutoSize = true;
-            this.Round.Location = new System.Drawing.Point(14, 9);
+            this.Round.Location = new System.Drawing.Point(9, 9);
             this.Round.Name = "Round";
             this.Round.Size = new System.Drawing.Size(48, 13);
             this.Round.TabIndex = 23;
