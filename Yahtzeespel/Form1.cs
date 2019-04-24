@@ -267,10 +267,11 @@ namespace Yahtzeespel
                                 String tag2 = lab.Tag.ToString();
                                 if (tag2 == tag)
                                 {
-                                    int number = System.Convert.ToInt32(lab.Text.Substring(lab.Text.Length-1));
-                                    //MessageBox.Show("Number = " + number.ToString());
-                                    number++;
-                                    lab.Text = lab.Text.Substring(0, lab.Text.Length - 1) + number.ToString();
+                                    int number = System.Convert.ToInt32(lab.Text.Substring(getSubstringPosNumber(lab) + 1));
+                                    //MessageBox.Show("NowNumber = " + number.ToString());
+                                    int diceNumber = System.Convert.ToInt32(tag.ToString());
+                                    //MessageBox.Show("to add dicenumb = " + diceNumber.ToString());
+                                    lab.Text = lab.Text.Substring(0, lab.Text.Length - 1) + (number + diceNumber);
                                 }
                             }
                         }
