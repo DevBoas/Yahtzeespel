@@ -67,7 +67,47 @@ namespace Yahtzeespel
 
         private void CheckForStraight()
         {
-
+            int[] dices = new int[5];
+            int index = 0;
+            int steps = 1;
+            int biggestStep = 1;
+            for (int i = 1; i < 7; i++)
+            {
+                foreach (Control c in Controls)
+                {
+                    if (c.GetType() == typeof(PictureBox))
+                    {
+                        PictureBox pic = (PictureBox)c;
+                        int DiceNumber = System.Convert.ToInt32(pic.Image.Tag);
+                        if (DiceNumber == i)
+                        {
+                            dices[index] = DiceNumber;
+                            index++;
+                        }
+                    }
+                }
+            }
+            
+            for (int i = 0; i < dices.Length; i++)
+            {
+                if (i > 0)
+                {
+                    int thisStep = dices[i] - dices[i - 1];
+                    if (thisStep == 1)
+                        steps++;
+                    else
+                        steps = 1;
+                    if (steps > biggestStep)
+                        biggestStep = steps;
+                }
+                //MessageBox.Show("Steps = " + biggestStep.ToString());
+                if ((SmallStraight.Tag.ToString() != "X") && (steps > 3))
+                    SmallStraight.Text = SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1) + "30";
+                if ((LargeStraight.Tag.ToString() != "X") && (steps > 4))
+                    LargeStraight.Text = LargeStraight.Text.Substring(0, LargeStraight.Text.Length - 1) + "40";
+                //MessageBox.Show(i + " place is = " + dices[i].ToString());
+            }
+            
         }
 
         private void CheckForCarrre()
