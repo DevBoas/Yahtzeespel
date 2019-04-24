@@ -40,7 +40,6 @@ namespace Yahtzeespel
 
         int rolls = 3;
         int gameRound = 1;
-        Boolean newGame = false;
 
         private void DiceClick(object sender, EventArgs e)
         {
@@ -59,7 +58,6 @@ namespace Yahtzeespel
             Btn_RollDice.Text = "Roll dice";
             rolls = 3;
             gameRound = 1;
-            newGame = false;
             UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
             Round.Text = "Rolls left " + rolls.ToString();
             Round.Text = "Round " + gameRound.ToString();
@@ -80,16 +78,6 @@ namespace Yahtzeespel
                 }
             }
             ResetScoreBoard();
-        }
-
-        private void EndOfRound()
-        {
-            if (!newGame)
-            {
-                newGame = true;
-                ResetScoreBoard();
-                UpdateScoreBoard();
-            }
         }
 
         private void CheckForStraight()
@@ -333,11 +321,11 @@ namespace Yahtzeespel
                         ResetScoreBoard();
                         UpdateScoreBoard();
                         rolls--;
+                        if (rolls == 0)
+                            Btn_RollDice.Enabled = false;
                         UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
                     }
                 }
-                else
-                    EndOfRound();
             }
             else
             {
@@ -380,7 +368,8 @@ namespace Yahtzeespel
 
             // reset scoreboard to default
             ResetScoreBoard();
-            // clear dice;
+
+            // clear dice selections;
             foreach (Control c in Controls)
             {
                 if (c.GetType() == typeof(PictureBox))
@@ -389,23 +378,22 @@ namespace Yahtzeespel
                     pic.BackColor = SystemColors.Control;
                 }
             }
+
+            //re-enable button
+            Btn_RollDice.Enabled = true;
+
             if (gameRound < 13)
             {
                 rolls = 3;
                 gameRound++;
             }
             else
-                rolls = 0;
-            Round.Text = "Round " + gameRound.ToString();
-            //MessageBox.Show("gameRound " + gameRound.ToString() + " rolls = " + rolls.ToString());
-            if (gameRound <= 13)
-            {
-                newGame = false;
-            }
-            if ((gameRound == 13) && (rolls == 0))
             {
                 Btn_RollDice.Text = "New game";
+                rolls = 0;
             }
+
+            Round.Text = "Round " + gameRound.ToString();
             UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
         }
 
