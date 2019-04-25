@@ -16,7 +16,7 @@ namespace Yahtzeespel
         int rolls = 3;
         int gameRound = 1;
         int yahtzeeRound = 0;
-
+        Label HasToPick = null;
         public Form1()
         {
             InitializeComponent();
@@ -58,6 +58,7 @@ namespace Yahtzeespel
         {
             rolls = 3;
             gameRound = 1;
+            HasToPick = null;
             Btn_RollDice.Text = "Roll dice";
             UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
             Round.Text = "Round " + gameRound.ToString();
@@ -211,6 +212,29 @@ namespace Yahtzeespel
                 ThreeOfAKind.Text = ThreeOfAKind.Text.Substring(0, getSubstringPosNumber(ThreeOfAKind) + 2) + total.ToString();
         }
 
+        private Label CheckForForcePick(int num)
+        {
+            Label lab = null;
+
+            foreach (Control c in Controls)
+            {
+                if (c.GetType() == typeof(Label))
+                {
+                    Label lab2 = (Label)c;
+                    if (lab2.Tag != null)
+                    {
+                        string TagNumber = lab2.Tag.ToString();
+                        //MessageBox.Show("Tag = " + TagNumber);
+                        if (TagNumber == num.ToString())
+                        {
+                            lab = lab2;
+                            break;
+                        }
+                    }
+                }
+            }
+            return lab;
+        }
         private void CheckForYahtzee()
         {
             int[] dices = new int[5];
@@ -242,12 +266,27 @@ namespace Yahtzeespel
                 else if (yahtzeeRound != gameRound)
                 {
                     //joker
-                    int scoreNumber = System.Convert.ToInt32(Score.Text.Substring(getSubstringPosNumber(Score) + 1));
-                    int totalScore = 100 + scoreNumber;
-                    Fullhouse.Text = Fullhouse.Text.Substring(0, getSubstringPosNumber(Fullhouse) + 2) + "25";
-                    SmallStraight.Text = SmallStraight.Text.Substring(0, getSubstringPosNumber(SmallStraight) + 2) + "30";
-                    LargeStraight.Text = LargeStraight.Text.Substring(0, getSubstringPosNumber(LargeStraight) + 2) + "40";
-                    Score.Text = Score.Text.Substring(0, getSubstringPosNumber(Score) + 2) + totalScore.ToString();
+                    int yahtzeeNumber = System.Convert.ToInt32(Yahtzee.Text.Substring(getSubstringPosNumber(Yahtzee) + 1));
+                    if (yahtzeeNumber > 0)
+                    {
+                        //ToAdd to conform to the rules force the user to pick eg 5-5-5-5-5 FIVES if thats filled it becomes a joker
+                        int scoreNumber = System.Convert.ToInt32(Score.Text.Substring(getSubstringPosNumber(Score) + 1));
+                        int totalScore = 100 + scoreNumber;
+                        Label lab = CheckForForcePick(dices[0]);
+                        if (lab != null)
+                        {
+                            //force user to pick
+                            HasToPick = lab;
+                        }
+                        else
+                        {
+                            Fullhouse.Text = Fullhouse.Text.Substring(0, getSubstringPosNumber(Fullhouse) + 2) + "25";
+                            SmallStraight.Text = SmallStraight.Text.Substring(0, getSubstringPosNumber(SmallStraight) + 2) + "30";
+                            LargeStraight.Text = LargeStraight.Text.Substring(0, getSubstringPosNumber(LargeStraight) + 2) + "40";
+                        }
+                        Yahtzee.Text = Yahtzee.Text.Substring(0, getSubstringPosNumber(Yahtzee) + 2) + (yahtzeeNumber+100).ToString();
+                        Score.Text = Score.Text.Substring(0, getSubstringPosNumber(Score) + 2) + totalScore.ToString();
+                    }
                 }
             }
             //MessageBox.Show("Count = " + count.ToString());
@@ -417,8 +456,10 @@ namespace Yahtzeespel
             if (rolls != 3)
             {
                 Label lab = (sender as Label);
-                if (lab.Tag.ToString() != "X")
+                if (lab.Tag.ToString() != "X" && (HasToPick == null) || (HasToPick == lab))
                 {
+                    if (HasToPick != null)
+                        HasToPick = null;
                     lab.ForeColor = Color.Red;
                     lab.Tag = "X";
                     int number = System.Convert.ToInt32(lab.Text.Substring(getSubstringPosNumber(lab) + 1));
@@ -426,6 +467,10 @@ namespace Yahtzeespel
                     int totalScore = number + scoreNumber;
                     Score.Text = Score.Text.Substring(0, getSubstringPosNumber(Score) + 2) + totalScore.ToString();
                     nextRound();
+                }
+                else if (HasToPick != null)
+                {
+                    MessageBox.Show("You must put your score in " + HasToPick.Text.Substring(0, getSubstringPosNumber(HasToPick)) + ".");
                 }
             }
         }
