@@ -320,7 +320,7 @@ namespace Yahtzeespel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 157);
+            this.ClientSize = new System.Drawing.Size(549, 196);
             this.Controls.Add(this.Fullhouse);
             this.Controls.Add(this.Score);
             this.Controls.Add(this.Round);
@@ -346,7 +346,11 @@ namespace Yahtzeespel
             this.Controls.Add(this.Dice3);
             this.Controls.Add(this.Dice2);
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(549, 196);
+            this.MinimumSize = new System.Drawing.Size(549, 196);
             this.Name = "Form1";
+            this.ShowIcon = false;
             this.Text = "Yahtzee";
             ((System.ComponentModel.ISupportInitialize)(this.Dice2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Dice3)).EndInit();
