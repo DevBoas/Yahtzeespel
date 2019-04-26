@@ -11,6 +11,7 @@ namespace Yahtzeespel
         int gameRound = 1;
         int yahtzeeRound = 0;
         Label HasToPick = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -77,147 +78,7 @@ namespace Yahtzeespel
             ResetScoreBoard();
         }
 
-        private void CheckForStraight()
-        {
-            int[] dices = new int[5];
-            int[] dicesCount = new int[5] { 0, 0, 0, 0, 0 };
 
-            int index = 0;
-            int count = 0;
-            int steps = 0;
-            int biggestStep = 1;
-
-            Boolean fullhouse = false;
-            for (int i = 1; i < 7; i++)
-            {
-                foreach (Control c in Controls)
-                {
-                    if (c.GetType() == typeof(PictureBox))
-                    {
-                        PictureBox pic = (PictureBox)c;
-                        int DiceNumber = System.Convert.ToInt32(pic.Image.Tag);
-                        if (DiceNumber == i)
-                        {
-                            dices[index] = DiceNumber;
-                            index++;
-                        }
-                    }
-                }
-            }
-            for (int i = 1; i < 6; i++)
-                for (int y = 0; y < dices.Length; y++)
-                    if (dices[y] == i)
-                        dicesCount[i - 1]++;
-
-            for (int i = 0; i < dicesCount.Length; i++)
-            {
-                if (dicesCount[i] > 0)
-                {
-                    if (dicesCount[i] > 1)
-                    {
-                        if ((dicesCount[i] == 2) && (count == 3) || (dicesCount[i] == 3) && (count == 2))
-                            fullhouse = true;
-                        count = dicesCount[i];
-                    }
-                    //MessageBox.Show("steps++");
-                    steps++;
-                    if (steps > biggestStep)
-                        biggestStep = steps;
-                }
-                else
-                    steps = 0;
-                  //int num = i + 1;
-                //MessageBox.Show("Dice " + num.ToString() + " Amount " + dicesCount[i]);
-            }
-            //MessageBox.Show("steps = " + steps.ToString());
-            //MessageBox.Show("Biggeststep = " + biggestStep.ToString());
-            //MessageBox.Show(SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1));
-            if ((Fullhouse.Tag.ToString() != "X") && (fullhouse))
-                Fullhouse.Text = Fullhouse.Text.Substring(0, getSubstringPosNumber(Fullhouse) + 2) + "25";
-            if ((SmallStraight.Tag.ToString() != "X") && (biggestStep > 3))
-                SmallStraight.Text = SmallStraight.Text.Substring(0, getSubstringPosNumber(SmallStraight) + 2) + "30";
-            if ((LargeStraight.Tag.ToString() != "X") && (biggestStep == 5))
-                LargeStraight.Text = LargeStraight.Text.Substring(0, getSubstringPosNumber(LargeStraight) + 2) + "40";
-            //MessageBox.Show(i + " place is = " + dices[i].ToString());
-        }
-
-        private void CheckForCarrre()
-        {
-            int[] dices = new int[5];
-            int index = 0;
-            int highestCount = 0;
-            int count = 0;
-            int total = 0;
-            foreach (Control c in Controls)
-            {
-                if (c.GetType() == typeof(PictureBox))
-                {
-                    PictureBox pic = (PictureBox)c;
-                    int DiceNumber = System.Convert.ToInt32(pic.Image.Tag);
-                    dices[index] = DiceNumber;
-                    index++;
-                }
-            }
-            for (int i = 1; i < 7; i++)
-            {
-                for (int y = 0; y < dices.Length; y++)
-                {
-                    if (dices[y] == i)
-                        count++;
-                }
-                if (count > highestCount)
-                    highestCount = count;
-                count = 0;
-            }
-            //MessageBox.Show("Highest int = " + highestCountNum.ToString());
-            //MessageBox.Show("Highest amount = " + highestCount.ToString());
-            for (int y = 0; y < dices.Length; y++)
-            {
-                total += dices[y];
-            }
-            //MessageBox.Show("Total amount = " + total.ToString());
-            if ((Carre.Tag.ToString() != "X") && (highestCount >= 4))
-                Carre.Text = Carre.Text.Substring(0, getSubstringPosNumber(Carre) + 2) + total.ToString();
-        }
-
-        private void CheckForThreeOfAKind()
-        {
-            int[] dices = new int[5];
-            int index = 0;
-            int highestCount = 0;
-            int count = 0;
-            int total = 0;
-            foreach (Control c in Controls)
-            {
-                if (c.GetType() == typeof(PictureBox))
-                {
-                    PictureBox pic = (PictureBox)c;
-                    int DiceNumber = System.Convert.ToInt32(pic.Image.Tag);
-                    dices[index] = DiceNumber;
-                    index++;
-                }
-            }
-            for (int i = 1; i < 7; i++)
-            {
-                for (int y = 0; y < dices.Length; y++)
-                {
-                    if (dices[y] == i)
-                        count++;
-                }
-                if (count > highestCount)
-                    highestCount = count;
-                count = 0;
-            }
-            //MessageBox.Show("Highest int = " + highestCountNum.ToString());
-            //MessageBox.Show("Highest amount = " + highestCount.ToString());
-            for (int y = 0; y < dices.Length; y++)
-            {
-                total += dices[y];
-            }
-            //MessageBox.Show("Total amount = " + total.ToString());
-            if ((ThreeOfAKind.Tag.ToString() != "X") && (highestCount >= 3))
-                ThreeOfAKind.Text = ThreeOfAKind.Text.Substring(0, getSubstringPosNumber(ThreeOfAKind) + 2) + total.ToString();
-        }
 
         private Label CheckForForcePick(int num)
         {
@@ -231,7 +92,6 @@ namespace Yahtzeespel
                     if (lab2.Tag != null)
                     {
                         string TagNumber = lab2.Tag.ToString();
-                        //MessageBox.Show("Tag = " + TagNumber);
                         if (TagNumber == num.ToString())
                         {
                             lab = lab2;
@@ -240,30 +100,87 @@ namespace Yahtzeespel
                     }
                 }
             }
+
             return lab;
         }
-        private void CheckForYahtzee()
+
+        private void CheckForChance(int[] DiceNumberArr)
         {
-            int[] dices = new int[5];
-            int index = 0;
-            int count = 1;
-            foreach (Control c in Controls)
+            int total = 0;
+            for (int i = 0; i < DiceNumberArr.Length; i++)
+                total += DiceNumberArr[i] * i + 1;
+            if (Chance.Tag.ToString() != "X")
+                Chance.Text = Chance.Text.Substring(0, getSubstringPosNumber(Chance) + 2) + total.ToString();
+        }
+
+        private void CheckForThreeOfAKind(int[] DiceNumberArr)
+        {
+            Boolean found = false;
+            int total = 0;
+            for (int i = 0; i < DiceNumberArr.Length; i++)
             {
-                if (c.GetType() == typeof(PictureBox))
+                total += DiceNumberArr[i] * i + 1;
+                if (DiceNumberArr[i] >= 3)
+                    found = true;
+            }
+            if (found && (ThreeOfAKind.Tag.ToString() != "X"))
+                ThreeOfAKind.Text = ThreeOfAKind.Text.Substring(0, getSubstringPosNumber(ThreeOfAKind) + 2) + total.ToString();
+        }
+
+        private void CheckForCarrre(int[] DiceNumberArr)
+        {
+            Boolean found = false;
+            int total = 0;
+            for (int i = 0; i < DiceNumberArr.Length; i++)
+            {
+                total += DiceNumberArr[i] * i + 1;
+                if (DiceNumberArr[i] >= 4)
+                    found = true;
+            }
+            if (found && (Carre.Tag.ToString() != "X"))
+                Carre.Text = Carre.Text.Substring(0, getSubstringPosNumber(Carre) + 2) + total.ToString();
+        }
+        private void CheckForStraight(int[] DiceNumberArr)
+        {
+            int count = 0;
+            int steps = 0;
+            int biggestStep = 1;
+            Boolean fullhouse = false;
+
+            for (int i = 0; i < DiceNumberArr.Length; i++)
+            {
+                if (DiceNumberArr[i] > 0)
                 {
-                    PictureBox pic = (PictureBox)c;
-                    int DiceNumber = System.Convert.ToInt32(pic.Image.Tag);
-                    dices[index] = DiceNumber;
-                    index++;
+                    if (DiceNumberArr[i] > 1)
+                    {
+                        if ((DiceNumberArr[i] == 2) && (count == 3) || (DiceNumberArr[i] == 3) && (count == 2))
+                            fullhouse = true;
+                        count = DiceNumberArr[i];
+                    }
+                    steps++;
+                    if (steps > biggestStep)
+                        biggestStep = steps;
                 }
+                else
+                    steps = 0;
             }
-            for (int i = 0; i < dices.Length; i++)
-            {
-               if (i > 0)
-                if (dices[i] == dices[i - 1])
-                    count++;
-            }
-            if (count == 5)
+            if ((fullhouse) && (Fullhouse.Tag.ToString() != "X"))
+                Fullhouse.Text = Fullhouse.Text.Substring(0, getSubstringPosNumber(Fullhouse) + 2) + "25";
+            if ((biggestStep > 3) && (SmallStraight.Tag.ToString() != "X"))
+                SmallStraight.Text = SmallStraight.Text.Substring(0, getSubstringPosNumber(SmallStraight) + 2) + "30";
+            if ((biggestStep == 5) && (LargeStraight.Tag.ToString() != "X"))
+                LargeStraight.Text = LargeStraight.Text.Substring(0, getSubstringPosNumber(LargeStraight) + 2) + "40";
+        }
+
+        private void CheckForYahtzee(int[] DiceNumberArr)
+        {
+            int yahtzee = 0;
+
+            for (int i = 0; i < DiceNumberArr.Length; i++)
+                if (DiceNumberArr[i] == 5)
+                    yahtzee = i + 1;
+
+            if (yahtzee > 0)
             {
                 int toAdd = 50;
                 if (yahtzeeRound == 0)
@@ -279,76 +196,81 @@ namespace Yahtzeespel
                         //ToAdd to conform to the rules force the user to pick eg 5-5-5-5-5 FIVES if thats filled it becomes a joker
                         int scoreNumber = System.Convert.ToInt32(Score.Text.Substring(getSubstringPosNumber(Score) + 1));
                         int totalScore = 100 + scoreNumber;
-                        Label lab = CheckForForcePick(dices[0]);
+                        Label lab = CheckForForcePick(yahtzee);
                         if (lab != null)
-                        {
-                            //force user to pick
                             HasToPick = lab;
-                        }
                         else
                         {
                             Fullhouse.Text = Fullhouse.Text.Substring(0, getSubstringPosNumber(Fullhouse) + 2) + "25";
                             SmallStraight.Text = SmallStraight.Text.Substring(0, getSubstringPosNumber(SmallStraight) + 2) + "30";
                             LargeStraight.Text = LargeStraight.Text.Substring(0, getSubstringPosNumber(LargeStraight) + 2) + "40";
                         }
-                        Yahtzee.Text = Yahtzee.Text.Substring(0, getSubstringPosNumber(Yahtzee) + 2) + (yahtzeeNumber+100).ToString();
+                        Yahtzee.Text = Yahtzee.Text.Substring(0, getSubstringPosNumber(Yahtzee) + 2) + (yahtzeeNumber + 100).ToString();
                         Score.Text = Score.Text.Substring(0, getSubstringPosNumber(Score) + 2) + totalScore.ToString();
                     }
                 }
             }
             //MessageBox.Show("Count = " + count.ToString());
         }
-        private void CheckForChance()
+
+        private int[] CreateDiceNumberArr()
         {
-            int total = 0;
-            //int[] dices = new int[5];
+            int[] Dices = new int[5];
+            int[] DiceNumberArr = new int[6] { 0, 0, 0, 0, 0, 0 };
+            int index = 0;
+
             foreach (Control c in Controls)
             {
                 if (c.GetType() == typeof(PictureBox))
                 {
                     PictureBox pic = (PictureBox)c;
-                    int DiceNumber = System.Convert.ToInt32(pic.Image.Tag);
-                    total += DiceNumber;
+                    int DiceNum = System.Convert.ToInt32(pic.Image.Tag);
+                    Dices[index] = DiceNum;
+                    index++;
                 }
             }
-            if (Chance.Tag.ToString() != "X")
-                Chance.Text = Chance.Text.Substring(0, getSubstringPosNumber(Chance) + 2) + total.ToString();
-        }
-        private void UpdateScoreBoard()
-        {
-            foreach (Control c in Controls)
+
+            for (int i = 0; i < Dices.Length; i++)
+                DiceNumberArr[Dices[i]-1]++;
+
+            for (int i = 0; i < DiceNumberArr.Length; i++)
             {
-                if (c.GetType() == typeof(PictureBox))
+                //MessageBox.Show("Dice"+((i+1).ToString())+ " = " + DiceNumberArr[i].ToString() );
+            }
+
+            return DiceNumberArr;
+        }
+        private void UpdateSingles(int[] DiceNumberArr)
+        {
+            for (int i = 0; i < DiceNumberArr.Length; i++)
+            {
+                foreach (Control c in Controls)
                 {
-                    PictureBox pic = (PictureBox)c;
-                    String tag = pic.Image.Tag.ToString();
-                    //MessageBox.Show("Tag1 = " + tag);
-                    foreach (Control c2 in Controls)
+                    if (c.GetType() == typeof(Label))
                     {
-                        if (c2.GetType() == typeof(Label))
+                        Label lab = (Label)c;
+                        if (lab.Tag != null && (lab.Tag.ToString() != String.Empty) && (lab.Tag.ToString() != "X"))
                         {
-                            Label lab = (Label)c2;
-                            if (lab.Tag != null)
+                            int ScoreTagNum = System.Convert.ToInt32(lab.Tag);
+                            if ((i + 1) == ScoreTagNum)
                             {
-                                String tag2 = lab.Tag.ToString();
-                                if (tag2 == tag)
-                                {
-                                    int number = System.Convert.ToInt32(lab.Text.Substring(getSubstringPosNumber(lab) + 1));
-                                    //MessageBox.Show("NowNumber = " + number.ToString());
-                                    int diceNumber = System.Convert.ToInt32(tag.ToString());
-                                    //MessageBox.Show("to add dicenumb = " + diceNumber.ToString());
-                                    lab.Text = lab.Text.Substring(0, getSubstringPosNumber(lab) + 2) + (number + diceNumber);
-                                }
+                                lab.Text = lab.Text.Substring(0, getSubstringPosNumber(lab) + 2) + (DiceNumberArr[i] * (i + 1) ).ToString();
+                                break;
                             }
                         }
                     }
                 }
             }
-            CheckForThreeOfAKind();
-            CheckForCarrre();
-            CheckForStraight();
-            CheckForChance();
-            CheckForYahtzee();
+        }
+        private void UpdateScoreBoard()
+        {
+            int[] DiceNumberArr = CreateDiceNumberArr();
+            UpdateSingles(DiceNumberArr);
+            CheckForThreeOfAKind(DiceNumberArr);
+            CheckForCarrre(DiceNumberArr);
+            CheckForStraight(DiceNumberArr);
+            CheckForChance(DiceNumberArr);
+            CheckForYahtzee(DiceNumberArr);
         }
         
         private void RollDice(object sender, EventArgs e)
@@ -387,9 +309,7 @@ namespace Yahtzeespel
                 }
             }
             else
-            {
                 ResetGame();
-            }
         }
 
         private int getSubstringPosNumber(Label lab)
@@ -414,12 +334,8 @@ namespace Yahtzeespel
                 {
                     Label lab = (Label)c;
                     if (lab.Tag != null)
-                    {
                         if ((getSubstringPosNumber(lab) != 0) && (lab.Name != "Score") && lab.Tag.ToString() != "X")
-                        {
                             lab.Text = lab.Text.Substring(0, getSubstringPosNumber(lab) + 2) + "0";
-                        }
-                    }
                 }
             }
         }
@@ -450,8 +366,8 @@ namespace Yahtzeespel
             }
             else
             {
-                Btn_RollDice.Text = "New game";
                 rolls = 0;
+                Btn_RollDice.Text = "New game";
             }
 
             Round.Text = "Round " + gameRound.ToString();
@@ -476,11 +392,8 @@ namespace Yahtzeespel
                     nextRound();
                 }
                 else if (HasToPick != null)
-                {
                     MessageBox.Show("You must put your score in " + HasToPick.Text.Substring(0, getSubstringPosNumber(HasToPick)) + ".");
-                }
             }
         }
-
     }
 }
