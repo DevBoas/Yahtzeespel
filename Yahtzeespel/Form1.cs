@@ -80,10 +80,14 @@ namespace Yahtzeespel
         private void CheckForStraight()
         {
             int[] dices = new int[5];
+            int[] dicesCount = new int[5] { 0, 0, 0, 0, 0 };
+
             int index = 0;
-            int steps = 1;
+            int count = 0;
+            int steps = 0;
             int biggestStep = 1;
-            int same = 1;
+
+            Boolean fullhouse = false;
             for (int i = 1; i < 7; i++)
             {
                 foreach (Control c in Controls)
@@ -100,30 +104,39 @@ namespace Yahtzeespel
                     }
                 }
             }
-            
-            for (int i = 0; i < dices.Length; i++)
+            for (int i = 1; i < 6; i++)
+                for (int y = 0; y < dices.Length; y++)
+                    if (dices[y] == i)
+                        dicesCount[i - 1]++;
+
+            for (int i = 0; i < dicesCount.Length; i++)
             {
-                if (i > 0)
+                if (dicesCount[i] > 0)
                 {
-                    int thisStep = dices[i] - dices[i - 1];
-                    if (thisStep == 1)
-                        steps++;
-                    else if (thisStep == 0)
-                        same++;
-                    else
-                        steps = 1;
+                    if (dicesCount[i] > 1)
+                    {
+                        if ((dicesCount[i] == 2) && (count == 3) || (dicesCount[i] == 3) && (count == 2))
+                            fullhouse = true;
+                        count = dicesCount[i];
+                    }
+                    //MessageBox.Show("steps++");
+                    steps++;
                     if (steps > biggestStep)
                         biggestStep = steps;
                 }
+                else
+                    steps = 0;
+                  //int num = i + 1;
+                //MessageBox.Show("Dice " + num.ToString() + " Amount " + dicesCount[i]);
             }
-            //MessageBox.Show("Same = " + same.ToString());
-            //MessageBox.Show("Steps = " + biggestStep.ToString());
+            //MessageBox.Show("steps = " + steps.ToString());
+            //MessageBox.Show("Biggeststep = " + biggestStep.ToString());
             //MessageBox.Show(SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1));
-            if ((Fullhouse.Tag.ToString() != "X") && (same == 4))
+            if ((Fullhouse.Tag.ToString() != "X") && (fullhouse))
                 Fullhouse.Text = Fullhouse.Text.Substring(0, getSubstringPosNumber(Fullhouse) + 2) + "25";
             if ((SmallStraight.Tag.ToString() != "X") && (biggestStep > 3))
                 SmallStraight.Text = SmallStraight.Text.Substring(0, getSubstringPosNumber(SmallStraight) + 2) + "30";
-            if ((LargeStraight.Tag.ToString() != "X") && (biggestStep > 4))
+            if ((LargeStraight.Tag.ToString() != "X") && (biggestStep == 5))
                 LargeStraight.Text = LargeStraight.Text.Substring(0, getSubstringPosNumber(LargeStraight) + 2) + "40";
             //MessageBox.Show(i + " place is = " + dices[i].ToString());
         }
