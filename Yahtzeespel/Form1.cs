@@ -127,9 +127,9 @@ namespace Yahtzeespel
             //MessageBox.Show(SmallStraight.Text.Substring(0, SmallStraight.Text.Length - 1));
             if ((Fullhouse.Tag.ToString() != "X") && (same == 4))
                 Fullhouse.Text = Fullhouse.Text.Substring(0, getSubstringPosNumber(Fullhouse) + 2) + "25";
-            if ((SmallStraight.Tag.ToString() != "X") && (steps > 3))
+            if ((SmallStraight.Tag.ToString() != "X") && (biggestStep > 3))
                 SmallStraight.Text = SmallStraight.Text.Substring(0, getSubstringPosNumber(SmallStraight) + 2) + "30";
-            if ((LargeStraight.Tag.ToString() != "X") && (steps > 4))
+            if ((LargeStraight.Tag.ToString() != "X") && (biggestStep > 4))
                 LargeStraight.Text = LargeStraight.Text.Substring(0, getSubstringPosNumber(LargeStraight) + 2) + "40";
             //MessageBox.Show(i + " place is = " + dices[i].ToString());
         }
