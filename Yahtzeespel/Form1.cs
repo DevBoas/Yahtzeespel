@@ -213,33 +213,6 @@ namespace Yahtzeespel
             //MessageBox.Show("Count = " + count.ToString());
         }
 
-        private int[] CreateDiceNumberArr()
-        {
-            int[] Dices = new int[5];
-            int[] DiceNumberArr = new int[6] { 0, 0, 0, 0, 0, 0 };
-            int index = 0;
-
-            foreach (Control c in Controls)
-            {
-                if (c.GetType() == typeof(PictureBox))
-                {
-                    PictureBox pic = (PictureBox)c;
-                    int DiceNum = System.Convert.ToInt32(pic.Image.Tag);
-                    Dices[index] = DiceNum;
-                    index++;
-                }
-            }
-
-            for (int i = 0; i < Dices.Length; i++)
-                DiceNumberArr[Dices[i]-1]++;
-
-            for (int i = 0; i < DiceNumberArr.Length; i++)
-            {
-                //MessageBox.Show("Dice"+((i+1).ToString())+ " = " + DiceNumberArr[i].ToString() );
-            }
-
-            return DiceNumberArr;
-        }
         private void UpdateSingles(int[] DiceNumberArr)
         {
             for (int i = 0; i < DiceNumberArr.Length; i++)
@@ -262,9 +235,8 @@ namespace Yahtzeespel
                 }
             }
         }
-        private void UpdateScoreBoard()
+        private void UpdateScoreBoard(int [] DiceNumberArr)
         {
-            int[] DiceNumberArr = CreateDiceNumberArr();
             UpdateSingles(DiceNumberArr);
             CheckForThreeOfAKind(DiceNumberArr);
             CheckForCarrre(DiceNumberArr);
@@ -275,6 +247,7 @@ namespace Yahtzeespel
         
         private void RollDice(object sender, EventArgs e)
         {
+            int[] DiceNumberArr = new int[6] { 0, 0, 0, 0, 0, 0 };
             Button btn = (sender as Button);
             if (btn.Text == "Roll dice")
             {
@@ -290,8 +263,8 @@ namespace Yahtzeespel
                             if (pic.BackColor == SystemColors.Control)
                             {
                                 int dice = rnd.Next(1, 7);
-                                object O = Resources.ResourceManager.GetObject("Dice" + dice.ToString());
-                                pic.Image = (Image)O;
+                                DiceNumberArr[dice-1]++;
+                                pic.Image = (Image)Resources.ResourceManager.GetObject("Dice" + dice.ToString());
                                 pic.Image.Tag = dice.ToString();
                                 gooit++;
                             }
@@ -300,7 +273,7 @@ namespace Yahtzeespel
                     if (gooit > 0)
                     {
                         ResetScoreBoard();
-                        UpdateScoreBoard();
+                        UpdateScoreBoard(DiceNumberArr);
                         rolls--;
                         if (rolls == 0)
                             Btn_RollDice.Enabled = false;
