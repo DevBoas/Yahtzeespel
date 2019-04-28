@@ -39,14 +39,28 @@ namespace Yahtzeespel
 
         private void DiceClick(object sender, EventArgs e)
         {
-            if (rolls < 3)
+            if (rolls == 3 || rolls == 0)
+                return;
+
+            PictureBox pic = (PictureBox)sender;
+            if (pic.BackColor == Color.Red)
+                pic.BackColor = SystemColors.Control;
+            else
+                pic.BackColor = Color.Red;
+
+            foreach (Control c in Controls)
             {
-                PictureBox pic = (PictureBox)sender;
-                if (pic.BackColor == Color.Red)
-                    pic.BackColor = SystemColors.Control;
-                else
-                    pic.BackColor = Color.Red;
+                if (c.GetType() == typeof(PictureBox))
+                {
+                    PictureBox pic2 = (PictureBox)c;
+                    if (pic2.BackColor == SystemColors.Control)
+                    {
+                        Btn_RollDice.Enabled = true;
+                        return;
+                    }
+                }
             }
+            Btn_RollDice.Enabled = false;
         }
 
         private void ResetGame()
@@ -78,8 +92,6 @@ namespace Yahtzeespel
             ResetScoreBoard();
         }
 
-
-
         private Label CheckForForcePick(int num)
         {
             Label lab = null;
@@ -100,7 +112,6 @@ namespace Yahtzeespel
                     }
                 }
             }
-
             return lab;
         }
 
@@ -251,35 +262,29 @@ namespace Yahtzeespel
             Button btn = (sender as Button);
             if (btn.Text == "Roll dice")
             {
-                if (rolls > 0)
+                Random rnd = new Random();
+                foreach (Control c in Controls)
                 {
-                    int gooit = 0;
-                    Random rnd = new Random();
-                    foreach (Control c in Controls)
+                    if (c.GetType() == typeof(PictureBox))
                     {
-                        if (c.GetType() == typeof(PictureBox))
+                        PictureBox pic = (PictureBox)c;
+                        if (pic.BackColor == SystemColors.Control)
                         {
-                            PictureBox pic = (PictureBox)c;
-                            if (pic.BackColor == SystemColors.Control)
-                            {
-                                int dice = rnd.Next(1, 7);
-                                DiceNumberArr[dice-1]++;
-                                pic.Image = (Image)Resources.ResourceManager.GetObject("Dice" + dice.ToString());
-                                pic.Image.Tag = dice.ToString();
-                                gooit++;
-                            }
+                            int dice = rnd.Next(1, 7);
+                            DiceNumberArr[dice - 1]++;
+                            pic.Image = (Image)Resources.ResourceManager.GetObject("Dice" + dice.ToString());
+                            pic.Image.Tag = dice;
                         }
-                    }
-                    if (gooit > 0)
-                    {
-                        ResetScoreBoard();
-                        UpdateScoreBoard(DiceNumberArr);
-                        rolls--;
-                        if (rolls == 0)
-                            Btn_RollDice.Enabled = false;
-                        UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
+                        else
+                            DiceNumberArr[System.Convert.ToInt32(pic.Image.Tag) - 1]++;
                     }
                 }
+                rolls--;
+                if (rolls == 0)
+                    Btn_RollDice.Enabled = false;
+                UserRollsDisplay.Text = "Rolls left " + rolls.ToString();
+                ResetScoreBoard();
+                UpdateScoreBoard(DiceNumberArr);
             }
             else
                 ResetGame();
