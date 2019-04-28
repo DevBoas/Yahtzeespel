@@ -151,6 +151,7 @@ namespace Yahtzeespel
             if (found && (Carre.Tag.ToString() != "X"))
                 Carre.Text = Carre.Text.Substring(0, getSubstringPosNumber(Carre) + 2) + total.ToString();
         }
+
         private void CheckForStraight(int[] DiceNumberArr)
         {
             int count = 0;
@@ -189,8 +190,10 @@ namespace Yahtzeespel
 
             for (int i = 0; i < DiceNumberArr.Length; i++)
                 if (DiceNumberArr[i] == 5)
+                {
                     yahtzee = i + 1;
-
+                    break;
+                }
             if (yahtzee > 0)
             {
                 int toAdd = 50;
@@ -221,7 +224,6 @@ namespace Yahtzeespel
                     }
                 }
             }
-            //MessageBox.Show("Count = " + count.ToString());
         }
 
         private void UpdateSingles(int[] DiceNumberArr)
